@@ -1,0 +1,121 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/edit_course_post">#}
+{#  <table width="200" border="1">#}
+{#    <tr>#}
+{#      <td>Course name </td>#}
+{#      <td><label>#}
+{#        <input type="text" name="textfield" required value="{{ data.course}}"/>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Course details </td>#}
+{#      <td><input type="text" name="textfield2" required value="{{ data.course_details}}"/></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td colspan="2"><label>#}
+{#        #}
+{#        <div align="center">#}
+{#          <input type="submit" name="Submit" value="Edit" />#}
+{#        </div>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+{% extends 'ADMIN/index.html' %}
+{% block body %}
+<title>Edit Course</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f3;
+    margin: 20px;
+    color: #333;
+  }
+
+  form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td {
+    padding: 10px;
+  }
+
+  td:first-child {
+    font-weight: bold;
+    text-align: right;
+    width: 40%;
+  }
+
+  input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  div[align="center"] {
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="/edit_course_post">
+  <table>
+    <tr>
+      <td>Course Name</td>
+      <td><label>
+        <input type="text" name="textfield" required value="{{ data.course }}" />
+      </label></td>
+    </tr>
+    <tr>
+      <td>Course Details</td>
+      <td><input type="text" name="textfield2" required value="{{ data.course_details }}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div align="center">
+          <input type="submit" name="Submit" value="Edit" />
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

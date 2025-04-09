@@ -1,0 +1,188 @@
+{% extends 'ADMIN/index.html' %}
+{% block body %}
+<title>View Feedback</title>
+<style>
+  /* General Styling */
+{#  body {#}
+{#    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#    margin: 0;#}
+{#    padding: 20px;#}
+{#    color: #333;#}
+{#    background-color: #f4f4f4;#}
+{#  }#}
+{##}
+{#  .container {#}
+{#    max-width: 900px;#}
+{#    margin: 20px auto;#}
+{#    border-radius: 8px;#}
+{#    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);#}
+{#    padding: 20px;#}
+{#    background-color: #fff;#}
+{#  }#}
+
+  h2 {
+    text-align: center;
+    color: #002244;
+  }
+
+  /* Feedback Search Form */
+  form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  form label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  input[type="date"],
+  input[type="submit"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  input[type="submit"] {
+    background: #4A90E2;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background: #003366;
+  }
+
+  /* Feedback Card Styling */
+  .feedback-card {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .feedback-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #40B3A2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 15px;
+  }
+
+  .feedback-content {
+    flex-grow: 1;
+  }
+
+  .feedback-content h4 {
+    margin: 0;
+    color: #333;
+  }
+
+  .feedback-content p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  /* Star Rating */
+  .rating {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+  }
+
+  .rating input[type="radio"] {
+    display: none;
+  }
+
+  .rating label {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .rating input[type="radio"]:checked ~ label,
+  .rating label:hover,
+  .rating label:hover ~ label {
+    color: #ffa723;
+  }
+
+  /* Date Styling */
+  .date {
+    font-size: 14px;
+    color: #999;
+    margin-top: 5px;
+  }
+
+  /* No Feedback Message */
+  .no-feedback {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+  }
+</style>
+
+<div class="container">
+  <h2>Feedback</h2>
+
+  <!-- Feedback Search Form -->
+  <form action="/admin_view_feedback_search" method="post">
+    {% csrf_token %}
+    <label>
+      From Date:
+      <input type="date" name="d1" required />
+    </label>
+    <label>
+      To Date:
+      <input type="date" name="d2" required />
+    </label>
+    <input type="submit" value="Search" />
+  </form>
+
+  <!-- Feedback List -->
+  {% for i in val %}
+  <div class="feedback-card">
+    <div class="profile-pic">{{ i.CANDIDATE.name|slice:":1" }}</div>
+    <div class="feedback-content">
+      <h4>{{ i.CANDIDATE.name }}</h4>
+      <p>{{ i.feedback }}</p>
+
+      <!-- Star Rating -->
+      <div class="rating">
+        {% for r in "12345" %}
+          {% if forloop.counter <= i.rating %}
+            <input type="radio" id="star{{ forloop.counter }}" name="rating{{ forloop.counter }}" value="{{ forloop.counter }}" checked />
+            <label for="star{{ forloop.counter }}">?</label>
+          {% else %}
+            <input type="radio" id="star{{ forloop.counter }}" name="rating{{ forloop.counter }}" value="{{ forloop.counter }}" />
+            <label for="star{{ forloop.counter }}">?</label>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="date">{{ i.date }}</div>
+    </div>
+  </div>
+  {% empty %}
+    <p class="no-feedback">No feedback available.</p>
+  {% endfor %}
+</div>
+{% endblock %}

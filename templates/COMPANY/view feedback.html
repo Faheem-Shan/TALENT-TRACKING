@@ -1,0 +1,192 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body><form action="/admin_view_feedback_search" method="post">#}
+{#  <table width="374" height="113" border="1">#}
+{#  <tr>#}
+{#      <td>#}
+{#          From date<input type="date" name="d1"/>#}
+{#      </td>#}
+{#      <td>#}
+{#          To date<input type="date" name="d2"/>#}
+{#      </td>#}
+{#      <td>#}
+{#          <input type="submit" name="d3"/>#}
+{#      </td>#}
+{#  </tr>#}
+{#    <tr>#}
+{#      <td width="112">Candidate name </td>#}
+{#      <td width="110"> Feedback</td>#}
+{#      <td width="70">Rating</td>#}
+{#      <td width="54">Date</td>#}
+{#    </tr>#}
+{#      {% for i in val %}#}
+{#    <tr>#}
+{#      <td height="40">{{ i.CANDIDATE.name }}</td>#}
+{#      <td>&nbsp;{{ i.feedback }}</td>#}
+{#      <td>{{ i.rating }}&nbsp;</td>#}
+{#      <td>&nbsp;{{ i.date }}</td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>Feedback Search</title>
+  <style>
+    /* Resetting margins, padding, and box-sizing */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Form container styling */
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 800px;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    td, th {
+      padding: 12px;
+      text-align: left;
+      font-size: 16px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    /* Styling for input fields */
+    td input[type="date"] {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    td input[type="date"]:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    td input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    td input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    /* Alternating row colors */
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Add some spacing and centering */
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    .search-container td {
+      padding: 15px;
+      text-align: center;
+    }
+
+    .search-container input[type="date"] {
+      width: 100%;
+      max-width: 150px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <form action="/admin_view_feedback_search" method="post">
+    <div class="search-container">
+      <table width="100%" border="0">
+        <tr>
+          <td>
+            From date: <input type="date" name="d1"/>
+          </td>
+          <td>
+            To date: <input type="date" name="d2"/>
+          </td>
+          <td>
+            <input type="submit" name="d3" value="Search"/>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Candidate Name</th>
+          <th>Feedback</th>
+          <th>Rating</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in val %}
+        <tr>
+          <td>{{ i.CANDIDATE.name }}</td>
+          <td>{{ i.feedback }}</td>
+          <td>{{ i.rating }}</td>
+          <td>{{ i.date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </form>
+</body>
+</html>

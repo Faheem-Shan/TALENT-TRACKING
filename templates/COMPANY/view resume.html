@@ -1,0 +1,241 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#</form>#}
+{#<table width="319" height="108" border="1">#}
+{#  <tr>#}
+{#    <td width="113">Candidate name </td>#}
+{#    <td width="89">Resume</td>#}
+{#    <td width="95">Date</td>#}
+{#  </tr>#}
+{#    {% for i in val %}#}
+{#  <tr>#}
+{#    <td height="43">&nbsp;{{ i.CANDIDATE.name }}</td>#}
+{#    <td>{{ i.resume }}</td>#}
+{#    <td>&nbsp;{{ i.date }}</td>#}
+{#      {% endfor %}#}
+{#  </tr>#}
+{#</table>#}
+{#</body>#}
+{#</html>#}
+
+{##}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Resume Viewer</title>#}
+{#<style>#}
+{#    body {#}
+{#        font-family: Arial, sans-serif;#}
+{#        margin: 20px;#}
+{#        background-color: #f9f9f9;#}
+{#        color: #333;#}
+{#    }#}
+{##}
+{#    table {#}
+{#        width: 100%;#}
+{#        border-collapse: collapse;#}
+{#        margin-top: 20px;#}
+{#        background: #fff;#}
+{#        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);#}
+{#    }#}
+{##}
+{#    th, td {#}
+{#        padding: 12px;#}
+{#        text-align: left;#}
+{#        border: 1px solid #ddd;#}
+{#    }#}
+{##}
+{#    th {#}
+{#        background-color: #4CAF50;#}
+{#        color: white;#}
+{#        font-weight: bold;#}
+{#    }#}
+{##}
+{#    tr:nth-child(even) {#}
+{#        background-color: #f2f2f2;#}
+{#    }#}
+{##}
+{#    tr:hover {#}
+{#        background-color: #e9f5e9;#}
+{#    }#}
+{##}
+{#    .container {#}
+{#        max-width: 800px;#}
+{#        margin: 0 auto;#}
+{#        padding: 20px;#}
+{#        background: #ffffff;#}
+{#        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);#}
+{#        border-radius: 5px;#}
+{#    }#}
+{##}
+{#    h1 {#}
+{#        text-align: center;#}
+{#        font-size: 24px;#}
+{#        margin-bottom: 20px;#}
+{#        color: #333;#}
+{#    }#}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<div class="container">#}
+{#    <h1>Candidate Resumes</h1>#}
+{#    <form id="form1" name="form1" method="post" action="">#}
+{#        <!-- Form elements can be added here if needed -->#}
+{#    </form>#}
+{#    <table>#}
+{#        <thead>#}
+{#            <tr>#}
+{#                <th>Candidate Name</th>#}
+{#                <th>Resume</th>#}
+{#                <th>Date</th>#}
+{#            </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#            {% for i in val %}#}
+{#            <tr>#}
+{#                <td>{{ i.CANDIDATE.name }}</td>#}
+{#                <td>{{ i.resume }}</td>#}
+{#                <td>{{ i.date }}</td>#}
+{#            </tr>#}
+{#            {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+{#</div>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Resume Viewer</title>
+<style>
+    /* General styling */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    /* Card styling */
+    .card {
+        width: 100%;
+        height: auto;
+        background: #171717;
+        transition: 0.4s ease-in-out;
+        clip-path: polygon(
+            30px 0%,
+            100% 0,
+            100% calc(100% - 30px),
+            calc(100% - 30px) 100%,
+            0 100%,
+            0% 30px
+        );
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        color: white;
+    }
+
+    .card span {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 10px;
+    }
+
+    .card .info {
+        font-weight: 400;
+        font-size: 0.9em;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .card .img {
+        width: 5em;
+        height: 5em;
+        background: white;
+        border-radius: 15px;
+        margin: 10px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card button {
+        padding: 0.8em 1.7em;
+        border-radius: 25px;
+        border: none;
+        font-weight: bold;
+        background: #ffffff;
+        color: #171717;
+        transition: 0.4s ease-in-out;
+    }
+
+    .card button:hover {
+        background: red;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Candidate Resumes</h1>
+    <form id="form1" name="form1" method="post" action="">
+        <!-- Add form elements here if needed -->
+    </form>
+    <div class="cards-container">
+        {% for i in val %}
+        <div class="card">
+            <div class="img">
+                <span>Img</span>
+            </div>
+            <span>{{ i.CANDIDATE.name }}</span>
+            <div class="info">
+                <p>Resume: {{ i.resume }}</p>
+                <p>Date: {{ i.date }}</p>
+            </div>
+            <button>View Resume</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

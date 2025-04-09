@@ -1,0 +1,264 @@
+{##}
+{##}
+{##}
+{##}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/admin_search_materials">#}
+{#  <table width="456" height="151" border="1">#}
+{#    <tr>#}
+{#      <td colspan="5">course#}
+{#        <label>#}
+{#       <select name="select">#}
+{#            {% for i in data %}#}
+{#            <option value="{{ i.id }}">{{ i.course }}</option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td width="152">Course name </td>#}
+{##}
+{#      <td width="103">Materials</td>#}
+{#        <td width="82">Meterial details</td>#}
+{#      <td width="103">Materials file</td>#}
+{#      <td width="91"><p>&nbsp;</p>        </td>#}
+{#    </tr>#}
+{#     {% for i in val %}#}
+{#    <tr>#}
+{#      <td>{{ i.COURSE.course }}</td>#}
+{##}
+{#      <td>{{ i.name }}</td>#}
+{#          <td>{{ i.details }}&nbsp;</td>#}
+{#      <td><img src="{{ i.file.url }}" height="100" width="100" alt=""/></td>#}
+{#      <td width="91"><p><a href="admin_edit_materials/{{ i.id }}">Edit</a></p>#}
+{#      <p><a href="/delete_materilas/{{ i.id }}">Delete</a></p></td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#    <tr>#}
+{#      <td colspan="5"><div align="left"><a href="/admin_add_materials">Add new</a></div></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#  <div align="left"></div>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+{##}
+{#{% extends 'ADMIN/loginindex.html' %}#}
+{#{% block body %}#}
+{#<title>Manage Materials</title>#}
+{#<style>#}
+{#  body {#}
+{#    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#    background-color: #f9f9f9;#}
+{#    margin: 0;#}
+{#    padding: 20px;#}
+{#    color: #333;#}
+{#  }#}
+{##}
+{#  form {#}
+{#    max-width: 900px;#}
+{#    margin: 30px auto;#}
+{#    background: #ffffff;#}
+{#    border-radius: 8px;#}
+{#    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);#}
+{#    padding: 20px;#}
+{#  }#}
+{##}
+{#  table {#}
+{#    width: 100%;#}
+{#    border-collapse: collapse;#}
+{#  }#}
+{##}
+{#  td, th {#}
+{#    padding: 12px;#}
+{#    font-size: 14px;#}
+{#    color: #555;#}
+{#    text-align: left;#}
+{#    border-bottom: 1px solid #ddd;#}
+{#  }#}
+{##}
+{#  th {#}
+{#    font-weight: bold;#}
+{#    background-color: #f1f1f1;#}
+{#    color: #333;#}
+{#  }#}
+{##}
+{#  select {#}
+{#    padding: 8px;#}
+{#    font-size: 14px;#}
+{#    border-radius: 5px;#}
+{#    border: 1px solid #ccc;#}
+{#    width: 100%;#}
+{#    box-sizing: border-box;#}
+{#    transition: border 0.3s ease;#}
+{#  }#}
+{##}
+{#  select:focus {#}
+{#    border-color: #6a82fb;#}
+{#    background-color: #f3faff;#}
+{#  }#}
+{##}
+{#  input[type="submit"] {#}
+{#    background-color: #6a82fb;#}
+{#    color: white;#}
+{#    border: none;#}
+{#    cursor: pointer;#}
+{#    padding: 10px 20px;#}
+{#    font-weight: bold;#}
+{#    border-radius: 5px;#}
+{#    transition: background-color 0.3s ease;#}
+{#  }#}
+{##}
+{#  input[type="submit"]:hover {#}
+{#    background-color: #4f70d2;#}
+{#  }#}
+{##}
+{#  a {#}
+{#    color: #6a82fb;#}
+{#    text-decoration: none;#}
+{#    font-weight: bold;#}
+{#  }#}
+{##}
+{#  a:hover {#}
+{#    text-decoration: underline;#}
+{#  }#}
+{##}
+{#  .action-links {#}
+{#    text-align: center;#}
+{#    margin-top: 20px;#}
+{#  }#}
+{##}
+{#  .action-links a {#}
+{#    margin: 0 10px;#}
+{#  }#}
+{##}
+{#  .image-preview img {#}
+{#    width: 100px;#}
+{#    height: 100px;#}
+{#    object-fit: cover;#}
+{#    border-radius: 5px;#}
+{#  }#}
+{##}
+{#  @media (max-width: 768px) {#}
+{#    table {#}
+{#      font-size: 12px;#}
+{#    }#}
+{#    input[type="submit"] {#}
+{#      padding: 8px 15px;#}
+{#    }#}
+{#    select {#}
+{#      font-size: 12px;#}
+{#    }#}
+{#  }#}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/admin_search_materials">#}
+{#  <table>#}
+{#    <tr>#}
+{#      <td colspan="5" style="text-align: center; padding-bottom: 20px;">#}
+{#        <label for="course-select">Course: </label>#}
+{#        <select name="select" id="course-select">#}
+{#          {% for i in data %}#}
+{#          <option value="{{ i.id }}">{{ i.course }}</option>#}
+{#          {% endfor %}#}
+{#        </select>#}
+{#        <br><br>#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Course Name</th>#}
+{#      <th>Materials</th>#}
+{#      <th>Material Details</th>#}
+{#      <th>Material File</th>#}
+{#      <th>Actions</th>#}
+{#    </tr>#}
+{#    {% for i in val %}#}
+{#    <tr>#}
+{#      <td>{{ i.COURSE.course }}</td>#}
+{#      <td>{{ i.name }}</td>#}
+{#      <td>{{ i.details }}</td>#}
+{#      <td class="image-preview">#}
+{#        <img src="{{ i.file.url }}" alt="Material Image" />#}
+{#      </td>#}
+{#      <td>#}
+{#        <div class="action-links">#}
+{#          <a href="admin_edit_materials/{{ i.id }}">Edit</a> |#}
+{#          <a href="/delete_materilas/{{ i.id }}" style="color: red;">Delete</a>#}
+{#        </div>#}
+{#      </td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{#    <tr>#}
+{#      <td colspan="5" style="text-align: left;">#}
+{#        <a href="/admin_add_materials" style="font-weight: bold; color: #6a82fb;">Add New Material</a>#}
+{#      </td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+
+
+{% extends 'ADMIN/index.html' %}
+{% block body %}
+<title>Manage Materials</title>
+
+<body>
+  <form id="form1" name="form1" method="post" action="/admin_search_materials">
+    <table>
+      <tr>
+        <td colspan="5" style="text-align: center; padding-bottom: 20px;">
+          <label for="course-select">Course: </label>
+          <select name="select" id="course-select">
+            {% for i in data %}
+            <option value="{{ i.id }}">{{ i.course }}</option>
+            {% endfor %}
+          </select>
+          <br><br>
+          <input type="submit" name="Submit" value="Submit" />
+        </td>
+      </tr>
+      <tr>
+        <th>Course Name</th>
+        <th>Materials</th>
+        <th class="details-column">Material Details</th>
+        <th>Material File</th>
+        <th>Actions</th>
+      </tr>
+      {% for i in val %}
+      <tr>
+        <td>{{ i.COURSE.course }}</td>
+        <td>{{ i.name }}</td>
+        <td class="details-column">{{ i.details }}</td>
+        <td class="image-preview">
+          <img src="{{ i.file.url }}" alt="Material Image" />
+        </td>
+        <td>
+          <div class="action-links">
+            <a href="admin_edit_materials/{{ i.id }}">Edit</a> |
+            <a href="/delete_materilas/{{ i.id }}" style="color: red;">Delete</a>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td colspan="5" style="text-align: left;">
+          <a href="/admin_add_materials" style="font-weight: bold; color: #6a82fb;">Add New Material</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+{% endblock %}

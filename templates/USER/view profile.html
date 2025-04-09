@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>User Profile</title>
+    <style>
+        /* General reset and layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 12px;
+            font-size: 14px;
+            color: #555;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            color: #333;
+        }
+
+        img {
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #40B3A2;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2b8974;
+            transform: scale(1.05);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>User Profile</h2>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>{{ data.name }}</td>
+            </tr>
+            <tr>
+                <td>E-mail</td>
+                <td>{{ data.email }}</td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>{{ data.phone }}</td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td>{{ data.place }}</td>
+            </tr>
+            <tr>
+                <td>Pin</td>
+                <td>{{ data.pin }}</td>
+            </tr>
+            <tr>
+                <td>Post</td>
+                <td>{{ data.post }}</td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><img src="{{ data.photo.url }}" height="100" width="100" alt="Profile Photo"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;">
+                    <a href="/edit_profile_user" class="button">Edit</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

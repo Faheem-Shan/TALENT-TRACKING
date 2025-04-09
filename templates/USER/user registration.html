@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>User Registration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 12px;
+            font-size: 14px;
+            color: #555;
+            vertical-align: middle;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>User Registration</h2>
+        <form id="registrationForm" name="form1" method="post" action="/registrationcode" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" id="name" required/></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="email" id="email" required/></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="text" name="phone" id="phone" required/></td>
+                </tr>
+                <tr>
+                    <td>Place</td>
+                    <td><input type="text" name="place" id="place" required/></td>
+                </tr>
+                <tr>
+                    <td>Pin</td>
+                    <td><input type="text" name="pin" id="pin" required/></td>
+                </tr>
+                <tr>
+                    <td>Post</td>
+                    <td><input type="text" name="post" id="post" required/></td>
+                </tr>
+                <tr>
+                    <td>Photo</td>
+                    <td><input type="file" name="image" id="image" required/></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="password" id="password" required/></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="cpass" id="cpass" required/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="center">
+                            <input type="submit" name="Submit" value="Register" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div id="errorMessages"></div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            // Clear previous error messages
+            document.getElementById('errorMessages').innerHTML = '';
+
+            let valid = true;
+            let errorMessages = '';
+
+            // Validate name
+            let name = document.getElementById('name').value;
+            if (!name) {
+                valid = false;
+                errorMessages += '<p class="error">Name is required.</p>';
+            }
+
+            // Validate email
+            let email = document.getElementById('email').value;
+            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!email || !emailPattern.test(email)) {
+                valid = false;
+                errorMessages += '<p class="error">Please enter a valid email address.</p>';
+            }
+
+            // Validate phone
+            let phone = document.getElementById('phone').value;
+            let phonePattern = /^[0-9]{10}$/;
+            if (!phone || !phonePattern.test(phone)) {
+                valid = false;
+                errorMessages += '<p class="error">Please enter a valid 10-digit phone number.</p>';
+            }
+
+            // Validate passwords match
+            let password = document.getElementById('password').value;
+            let cpass = document.getElementById('cpass').value;
+            if (password !== cpass) {
+                valid = false;
+                errorMessages += '<p class="error">Passwords do not match.</p>';
+            }
+
+            // Show errors if any
+            if (!valid) {
+                document.getElementById('errorMessages').innerHTML = errorMessages;
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+</body>
+</html>

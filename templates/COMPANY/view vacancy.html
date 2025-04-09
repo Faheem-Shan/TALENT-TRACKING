@@ -1,0 +1,554 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#  <table width="646" height="227" border="1">#}
+{#    <tr>#}
+{#      <td width="60">company</td>#}
+{#      <td width="58">Vacancy</td>#}
+{#      <td width="32">Date</td>#}
+{#      <td width="102">No.of vacancy </td>#}
+{#      <td width="45">Details</td>#}
+{#      <td width="45">&nbsp;</td>#}
+{#    </tr>#}
+{#      {% for i in val %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ i.COMPANY.name }}</td>#}
+{#      <td>&nbsp;{{ i.vacancy }}</td>#}
+{#      <td>&nbsp;{{ i.date }}</td>#}
+{#      <td>&nbsp;{{ i.no_of_vacancy }}</td>#}
+{#      <td>&nbsp;{{ i.details }}</td>#}
+{#      <td><p><a href="/company_edit_vacancy/{{ i.id }}">Edit</a></p>#}
+{#      <p><a href="/delete_vacancy/{{ i.id }}">Delete</a></p></td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#    <tr>#}
+{#      <td colspan="6"><a href="/company_add_vacancy">Add</a></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+{##}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Vacancy Management</title>#}
+{#<style>#}
+{#    * {#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    body {#}
+{#        font-family: 'Arial', sans-serif;#}
+{#        background-color: #f4f7fc;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        min-height: 100vh;#}
+{#        padding: 20px;#}
+{#        animation: fadeIn 1s ease-out;#}
+{#    }#}
+{##}
+{#    @keyframes fadeIn {#}
+{#        0% { opacity: 0; }#}
+{#        100% { opacity: 1; }#}
+{#    }#}
+{##}
+{#    form {#}
+{#        background-color: #ffffff;#}
+{#        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);#}
+{#        border-radius: 16px;#}
+{#        padding: 30px;#}
+{#        width: 100%;#}
+{#        max-width: 800px;#}
+{#        margin-top: 30px;#}
+{#        opacity: 0;#}
+{#        animation: formFadeIn 1s ease-out forwards;#}
+{#    }#}
+{##}
+{#    @keyframes formFadeIn {#}
+{#        0% { opacity: 0; }#}
+{#        100% { opacity: 1; }#}
+{#    }#}
+{##}
+{#    table {#}
+{#        width: 100%;#}
+{#        border-collapse: collapse;#}
+{#        margin-top: 20px;#}
+{#    }#}
+{##}
+{#    th, td {#}
+{#        padding: 15px;#}
+{#        text-align: left;#}
+{#        border: 1px solid #e2e8f0;#}
+{#        font-size: 15px;#}
+{#        transition: all 0.3s ease;#}
+{#    }#}
+{##}
+{#    th {#}
+{#        background-color: #5c6bc0;#}
+{#        color: white;#}
+{#        font-weight: bold;#}
+{#        text-transform: uppercase;#}
+{#    }#}
+{##}
+{#    tr:nth-child(even) {#}
+{#        background-color: #fafafa;#}
+{#    }#}
+{##}
+{#    tr:hover {#}
+{#        background-color: #f4f7fc;#}
+{#        transform: translateY(-3px);#}
+{#        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);#}
+{#    }#}
+{##}
+{#    td {#}
+{#        color: #555;#}
+{#    }#}
+{##}
+{#    .actions a {#}
+{#        padding: 8px 16px;#}
+{#        border-radius: 6px;#}
+{#        font-size: 14px;#}
+{#        text-decoration: none;#}
+{#        transition: all 0.3s ease;#}
+{#    }#}
+{##}
+{#    .actions a.edit {#}
+{#        background-color: #4caf50;#}
+{#        color: white;#}
+{#    }#}
+{##}
+{#    .actions a.edit:hover {#}
+{#        background-color: #45a049;#}
+{#        transform: scale(1.05);#}
+{#    }#}
+{##}
+{#    .actions a.delete {#}
+{#        background-color: #f44336;#}
+{#        color: white;#}
+{#        margin-left: 8px;#}
+{#    }#}
+{##}
+{#    .actions a.delete:hover {#}
+{#        background-color: #e53935;#}
+{#        transform: scale(1.05);#}
+{#    }#}
+{##}
+{#    .add-link {#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        margin-top: 25px;#}
+{#    }#}
+{##}
+{#    .add-link a {#}
+{#        background-color: #28a745;#}
+{#        color: white;#}
+{#        font-weight: 600;#}
+{#        padding: 12px 20px;#}
+{#        border-radius: 6px;#}
+{#        font-size: 16px;#}
+{#        text-decoration: none;#}
+{#        transition: all 0.3s ease;#}
+{#    }#}
+{##}
+{#    .add-link a:hover {#}
+{#        background-color: #218838;#}
+{#        transform: scale(1.05);#}
+{#    }#}
+{##}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#  <table>#}
+{#    <thead>#}
+{#      <tr>#}
+{#        <th>Company</th>#}
+{#        <th>Vacancy</th>#}
+{#        <th>Date</th>#}
+{#        <th>No. of Vacancies</th>#}
+{#        <th>Details</th>#}
+{#        <th>Actions</th>#}
+{#      </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#      {% for i in val %}#}
+{#        <tr>#}
+{#          <td>{{ i.COMPANY.name }}</td>#}
+{#          <td>{{ i.vacancy }}</td>#}
+{#          <td>{{ i.date }}</td>#}
+{#          <td>{{ i.no_of_vacancy }}</td>#}
+{#          <td>{{ i.details }}</td>#}
+{#          <td class="actions">#}
+{#            <a href="/company_edit_vacancy/{{ i.id }}" class="edit">Edit</a>#}
+{#            <a href="/delete_vacancy/{{ i.id }}" class="delete">Delete</a>#}
+{#          </td>#}
+{#        </tr>#}
+{#      {% endfor %}#}
+{#    </tbody>#}
+{#  </table>#}
+{#  <div class="add-link">#}
+{#    <a href="/company_add_vacancy">Add New Vacancy</a>#}
+{#  </div>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Vacancy Management</title>#}
+{#<style>#}
+{#    * {#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    body {#}
+{#        font-family: 'Arial', sans-serif;#}
+{#        background-color: #f4f7fc;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        min-height: 100vh;#}
+{#        padding: 20px;#}
+{#        animation: fadeIn 1s ease-out;#}
+{#    }#}
+{##}
+{#    @keyframes fadeIn {#}
+{#        0% { opacity: 0; }#}
+{#        100% { opacity: 1; }#}
+{#    }#}
+{##}
+{#    .job-container {#}
+{#        display: flex;#}
+{#        flex-wrap: wrap;#}
+{#        justify-content: space-between;#}
+{#        gap: 20px;#}
+{#        max-width: 1200px;#}
+{#        width: 100%;#}
+{#    }#}
+{##}
+{#    .job-card {#}
+{#        background-color: #ffffff;#}
+{#        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);#}
+{#        border-radius: 16px;#}
+{#        padding: 20px;#}
+{#        width: calc(33.333% - 20px);#}
+{#        transition: all 0.3s ease;#}
+{#    }#}
+{##}
+{#    .job-card:hover {#}
+{#        transform: translateY(-5px);#}
+{#        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);#}
+{#    }#}
+{##}
+{#    .job-header {#}
+{#        display: flex;#}
+{#        justify-content: space-between;#}
+{#        align-items: center;#}
+{#        border-bottom: 1px solid #e2e8f0;#}
+{#        padding-bottom: 10px;#}
+{#        margin-bottom: 15px;#}
+{#    }#}
+{##}
+{#    .job-header h2 {#}
+{#        font-size: 20px;#}
+{#        color: #333;#}
+{#        margin: 0;#}
+{#    }#}
+{##}
+{#    .job-details {#}
+{#        font-size: 14px;#}
+{#        color: #555;#}
+{#        line-height: 1.6;#}
+{#    }#}
+{##}
+{#    .job-actions {#}
+{#        margin-top: 15px;#}
+{#        display: flex;#}
+{#        justify-content: flex-end;#}
+{#        gap: 10px;#}
+{#    }#}
+{##}
+{#    .job-actions a {#}
+{#        padding: 8px 16px;#}
+{#        border-radius: 6px;#}
+{#        font-size: 14px;#}
+{#        text-decoration: none;#}
+{#        transition: all 0.3s ease;#}
+{#    }#}
+{##}
+{#    .job-actions a.edit {#}
+{#        background-color: #4caf50;#}
+{#        color: white;#}
+{#    }#}
+{##}
+{#    .job-actions a.edit:hover {#}
+{#        background-color: #45a049;#}
+{#        transform: scale(1.05);#}
+{#    }#}
+{##}
+{#    .job-actions a.delete {#}
+{#        background-color: #f44336;#}
+{#        color: white;#}
+{#    }#}
+{##}
+{#    .job-actions a.delete:hover {#}
+{#        background-color: #e53935;#}
+{#        transform: scale(1.05);#}
+{#    }#}
+{##}
+{#    .add-link {#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        margin-top: 25px;#}
+{#    }#}
+{##}
+{#    .add-link a {#}
+{#        background-color: #28a745;#}
+{#        color: white;#}
+{#        font-weight: 600;#}
+{#        padding: 12px 20px;#}
+{#        border-radius: 6px;#}
+{#        font-size: 16px;#}
+{#        text-decoration: none;#}
+{#        transition: all 0.3s ease;#}
+{#    }#}
+{##}
+{#    .add-link a:hover {#}
+{#        background-color: #218838;#}
+{#        transform: scale(1.05);#}
+{#    }#}
+{##}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#  <div class="job-container">#}
+{#    {% for i in val %}#}
+{#      <div class="job-card">#}
+{#          <div class="job-header">#}
+{#              <h2>{{ i.COMPANY.name }}</h2>#}
+{#              <span>{{ i.date }}</span>#}
+{#          </div>#}
+{#          <div class="job-details">#}
+{#              <p><strong>Vacancy:</strong> {{ i.vacancy }}</p>#}
+{#              <p><strong>No. of Vacancies:</strong> {{ i.no_of_vacancy }}</p>#}
+{#              <p><strong>Details:</strong> {{ i.details }}</p>#}
+{#          </div>#}
+{#          <div class="job-actions">#}
+{#              <a href="/company_edit_vacancy/{{ i.id }}" class="edit">Edit</a>#}
+{#              <a href="/delete_vacancy/{{ i.id }}" class="delete">Delete</a>#}
+{#          </div>#}
+{#      </div>#}
+{#    {% endfor %}#}
+{#  </div>#}
+{#  <div class="add-link">#}
+{#    <a href="/company_add_vacancy">Add New Vacancy</a>#}
+{#  </div>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+{##}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Vacancy Management</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7fc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    .job-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    .job-card {
+        background-color: #ffffff;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        padding: 20px;
+{#        width: calc(33.333% - 20px);#}
+        width:500px;
+        transition: all 0.3s ease;
+    }
+
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .job-header h2 {
+        font-size: 20px;
+        color: #333;
+        margin: 0;
+    }
+
+    .job-details {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    .job-actions {
+        margin-top: 15px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .btn {
+        outline: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #40B3A2;
+        min-width: 100px;
+        border: 0;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        padding: 8px 16px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .btn:hover {
+        opacity: 0.95;
+    }
+
+    .btn .animation {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        transform: translate(-50%, -50%);
+        animation: ripple 0.6s linear infinite;
+    }
+
+    @keyframes ripple {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1),
+                        0 0 0 20px rgba(255, 255, 255, 0.1),
+                        0 0 0 40px rgba(255, 255, 255, 0.1),
+                        0 0 0 60px rgba(255, 255, 255, 0.1);
+        }
+        100% {
+            box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1),
+                        0 0 0 40px rgba(255, 255, 255, 0.1),
+                        0 0 0 60px rgba(255, 255, 255, 0.1),
+                        0 0 0 80px rgba(255, 255, 255, 0);
+        }
+    }
+
+    .add-link {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+    }
+
+    .add-link a {
+        background-color: #40B3A2;
+        color: white;
+        font-weight: 600;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 16px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .add-link a:hover {
+        background-color: #002244;
+        transform: scale(1.05);
+    }
+</style>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <div class="job-container">
+    {% for i in val %}
+      <div class="job-card">
+          <div class="job-header">
+              <h2>{{ i.COMPANY.name }}</h2>
+              <span>{{ i.date }}</span>
+          </div>
+          <div class="job-details">
+              <p><strong>Vacancy:</strong> {{ i.vacancy }}</p>
+              <p><strong>No. of Vacancies:</strong> {{ i.no_of_vacancy }}</p>
+              <p><strong>Details:</strong> {{ i.details }}</p>
+          </div>
+          <div class="job-actions">
+              <a href="/view_applications/{{ i.id }}" class="btn">Applications</a>
+              <a href="/company_edit_vacancy/{{ i.id }}" class="btn">Edit</a>
+              <a href="/delete_vacancy/{{ i.id }}" class="btn">Delete</a>
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="add-link">
+    <a href="/company_add_vacancy">Add New Vacancy</a>
+  </div>
+</form>
+</body>
+</html>

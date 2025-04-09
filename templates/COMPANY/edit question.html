@@ -1,0 +1,177 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/edit_question_post">#}
+{#  <table width="237" border="1">#}
+{#    <tr>#}
+{#      <td width="72">Question</td>#}
+{#      <td width="149"><label>#}
+{#        <input type="text" name="textfield" value="{{ val.questions }}" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 1 </td>#}
+{#      <td><input type="text" name="textfield2" value="{{ val.option_1 }}" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 2 </td>#}
+{#      <td><input type="text" name="textfield3" value="{{ val.option_2 }}"/></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 3 </td>#}
+{#      <td><input type="text" name="textfield4" value="{{ val.option_3 }}" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 4 </td>#}
+{#      <td><input type="text" name="textfield5" value="{{ val.option_4 }}"/></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Answer</td>#}
+{#      <td><input type="text" name="textfield6" value="{{ val.answer }}" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td colspan="2"><label>#}
+{#        <div align="center">#}
+{#          <input type="submit" name="Submit" value="Edit" />#}
+{#        </div>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Professional Form</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  form {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  form table {
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  form table td {
+    padding: 10px 5px;
+  }
+
+  form table td:first-child {
+    text-align: right;
+    font-weight: 500;
+    color: #333;
+    padding-right: 10px;
+    vertical-align: middle;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+
+  input[type="text"]:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.3);
+    outline: none;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    padding: 12px 0;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  input[type="submit"]:hover {
+    background: #45a049;
+  }
+
+  input[type="submit"]:active {
+    transform: scale(0.98);
+  }
+
+  .form-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+</style>
+</head>
+
+<body>
+  <form id="form1" name="form1" method="post" action="/edit_question_post">
+    <div class="form-title">Edit Question</div>
+    <table>
+      <tr>
+        <td>Question</td>
+        <td><input type="text" name="textfield" value="{{ val.questions }}" /></td>
+      </tr>
+      <tr>
+        <td>Option 1</td>
+        <td><input type="text" name="textfield2" value="{{ val.option_1 }}" /></td>
+      </tr>
+      <tr>
+        <td>Option 2</td>
+        <td><input type="text" name="textfield3" value="{{ val.option_2 }}" /></td>
+      </tr>
+      <tr>
+        <td>Option 3</td>
+        <td><input type="text" name="textfield4" value="{{ val.option_3 }}" /></td>
+      </tr>
+      <tr>
+        <td>Option 4</td>
+        <td><input type="text" name="textfield5" value="{{ val.option_4 }}" /></td>
+      </tr>
+      <tr>
+        <td>Answer</td>
+        <td><input type="text" name="textfield6" value="{{ val.answer }}" /></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" name="Submit" value="Edit" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>

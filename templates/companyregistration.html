@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Registration</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+            overflow: hidden; /* prevent scrollbars */
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* ensures the form is scrollable if content overflows */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3b2a6a;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #3b2a6a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2c1a4f;
+        }
+
+        .form-container label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-container a {
+            color: #3b2a6a;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .form-container a:hover {
+            color: #2c1a4f;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* Ensure the form's content doesn't overflow out of the viewport */
+        .form-container {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+    <script>
+        // Form Validation
+        function validateForm() {
+            let isValid = true;
+
+            // Clear any previous error messages
+            const errorElements = document.querySelectorAll('.error');
+            errorElements.forEach(error => error.textContent = '');
+
+            // Validate Company Name
+            const companyName = document.forms["form1"]["textfield"].value;
+            if (companyName == "") {
+                document.getElementById("companyNameError").textContent = "Company Name is required.";
+                isValid = false;
+            }
+
+            // Validate Place
+            const place = document.forms["form1"]["textfield2"].value;
+            if (place == "") {
+                document.getElementById("placeError").textContent = "Place is required.";
+                isValid = false;
+            }
+
+            // Validate Pin
+            const pin = document.forms["form1"]["textfield3"].value;
+            if (pin == "" || isNaN(pin)) {
+                document.getElementById("pinError").textContent = "Pin is required and must be a number.";
+                isValid = false;
+            }
+
+            // Validate Post
+            const post = document.forms["form1"]["textfield4"].value;
+            if (post == "") {
+                document.getElementById("postError").textContent = "Post is required.";
+                isValid = false;
+            }
+
+            // Validate Phone
+            const phone = document.forms["form1"]["textfield5"].value;
+            if (phone == "" || isNaN(phone)) {
+                document.getElementById("phoneError").textContent = "Phone is required and must be a number.";
+                isValid = false;
+            }
+
+            // Validate Email
+            const email = document.forms["form1"]["textfield6"].value;
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (email == "" || !email.match(emailPattern)) {
+                document.getElementById("emailError").textContent = "Valid Email is required.";
+                isValid = false;
+            }
+
+            // Validate Website
+            const website = document.forms["form1"]["textfield7"].value;
+            if (website == "") {
+                document.getElementById("websiteError").textContent = "Website is required.";
+                isValid = false;
+            }
+
+            // Validate Username
+            const username = document.forms["form1"]["textfield8"].value;
+            if (username == "") {
+                document.getElementById("usernameError").textContent = "Username is required.";
+                isValid = false;
+            }
+
+            // Validate Password
+            const password = document.forms["form1"]["textfield9"].value;
+            if (password == "") {
+                document.getElementById("passwordError").textContent = "Password is required.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Company Registration</h2>
+        <form name="form1" method="post" action="/company_registration_post" onsubmit="return validateForm()">
+            <table>
+                <tr>
+                    <td>Company Name</td>
+                    <td><input type="text" name="textfield" required />
+                    <span id="companyNameError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Place</td>
+                    <td><input type="text" name="textfield2" required />
+                    <span id="placeError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Pin</td>
+                    <td><input type="text" name="textfield3" required />
+                    <span id="pinError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Post</td>
+                    <td><input type="text" name="textfield4" required />
+                    <span id="postError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="text" name="textfield5" required />
+                    <span id="phoneError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>E-mail</td>
+                    <td><input type="text" name="textfield6" required />
+                    <span id="emailError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Website</td>
+                    <td><input type="text" name="textfield7" required />
+                    <span id="websiteError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" name="textfield8" required />
+                    <span id="usernameError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="text" name="textfield9" required />
+                    <span id="passwordError" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="Submit" value="Submit" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</body>
+</html>

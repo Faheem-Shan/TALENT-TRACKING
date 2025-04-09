@@ -1,0 +1,305 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/admin_search_company_verify">#}
+{#  <table width="488" border="1">#}
+{#    <tr>#}
+{#      <td colspan="6">name#}
+{#        <label>#}
+{#        <input type="text" name="textfield" value="{{ name }}" />#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td width="50">Name</td>#}
+{#      <td width="69">Address</td>#}
+{#      <td width="52">Phone</td>#}
+{#      <td width="99">E-mail</td>#}
+{#      <td width="50">Website</td>#}
+{#      <td width="50"></td>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ i.name }}</td>#}
+{#      <td>&nbsp;{{ i.place }}<br>{{ i.pin }}<br>{{ i.post }}</td>#}
+{#      <td>{{ i.phone }}</td>#}
+{#      <td>&nbsp;{{ i.email }}</td>#}
+{#      <td>&nbsp;{{ i.website }}</td>#}
+{#        <td>#}
+{#            {% if i.LOGIN.type == 'pending' %}#}
+{#                <p><a href="acceptcompany/{{ i.LOGIN.id }}">accept</a></p>#}
+{#                  <p><a href="rejectedcompany/{{ i.LOGIN.id }}">reject</a></p>#}
+{#                 {% elif i.LOGIN.type == 'company' %}#}
+{##}
+{#          Accepted#}
+{#        {% else %}#}
+{#        {{ i.LOGIN.type }}#}
+{#         {% endif %}#}
+{#        </td>#}
+{##}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+{##}
+{##}
+{##}
+{##}
+{#{% extends 'ADMIN/loginindex.html' %}#}
+{#{% block body %}#}
+{#<title>Company Management</title>#}
+{#<style>#}
+{#  body {#}
+{#    font-family: Arial, sans-serif;#}
+{#    margin: 20px;#}
+{#    background-color: #f9f9f9;#}
+{#    color: #333;#}
+{#  }#}
+{##}
+{#  table {#}
+{#    width: 100%;#}
+{#    border-collapse: collapse;#}
+{#    margin-bottom: 20px;#}
+{#    background-color: #fff;#}
+{#    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);#}
+{#  }#}
+{##}
+{#  table, th, td {#}
+{#    border: 1px solid #ddd;#}
+{#  }#}
+{##}
+{#  th, td {#}
+{#    padding: 10px;#}
+{#    text-align: left;#}
+{#  }#}
+{##}
+{#  th {#}
+{#    background-color: #f4f4f4;#}
+{#    font-weight: bold;#}
+{#  }#}
+{##}
+{#  tr:nth-child(even) {#}
+{#    background-color: #f9f9f9;#}
+{#  }#}
+{##}
+{#  tr:hover {#}
+{#    background-color: #f1f1f1;#}
+{#  }#}
+{##}
+{#  input[type="text"] {#}
+{#    padding: 5px;#}
+{#    width: 70%;#}
+{#    border: 1px solid #ccc;#}
+{#    border-radius: 4px;#}
+{#  }#}
+{##}
+{#  input[type="submit"] {#}
+{#    padding: 5px 10px;#}
+{#    background-color: #007bff;#}
+{#    color: white;#}
+{#    border: none;#}
+{#    border-radius: 4px;#}
+{#    cursor: pointer;#}
+{#  }#}
+{##}
+{#  input[type="submit"]:hover {#}
+{#    background-color: #0056b3;#}
+{#  }#}
+{##}
+{#  a {#}
+{#    text-decoration: none;#}
+{#    color: #007bff;#}
+{#  }#}
+{##}
+{#  a:hover {#}
+{#    text-decoration: underline;#}
+{#  }#}
+{##}
+{#  .actions p {#}
+{#    margin: 5px 0;#}
+{#  }#}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/admin_search_company_verify">#}
+{#  <table>#}
+{#    <tr>#}
+{#      <td colspan="6">#}
+{#        <label>#}
+{#          Name:#}
+{#          <input type="text" name="textfield" value="{{ name }}" />#}
+{#        </label>#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Name</th>#}
+{#      <th>Address</th>#}
+{#      <th>Phone</th>#}
+{#      <th>E-mail</th>#}
+{#      <th>Website</th>#}
+{#      <th>Actions</th>#}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#      <td>{{ i.name }}</td>#}
+{#      <td>{{ i.place }}<br>{{ i.pin }}<br>{{ i.post }}</td>#}
+{#      <td>{{ i.phone }}</td>#}
+{#      <td>{{ i.email }}</td>#}
+{#      <td>{{ i.website }}</td>#}
+{#      <td class="actions">#}
+{#        {% if i.LOGIN.type == 'pending' %}#}
+{#          <p><a href="acceptcompany/{{ i.LOGIN.id }}">Accept</a></p>#}
+{#          <p><a href="rejectedcompany/{{ i.LOGIN.id }}">Reject</a></p>#}
+{#        {% elif i.LOGIN.type == 'company' %}#}
+{#          Accepted#}
+{#        {% else %}#}
+{#          {{ i.LOGIN.type }}#}
+{#        {% endif %}#}
+{#      </td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{##}
+{##}
+{##}
+
+{% extends 'ADMIN/index.html' %}
+{% block body %}
+<title>Company Management</title>
+<style>
+{#  body {#}
+{#    font-family: Arial, sans-serif;#}
+{#    margin: 20px;#}
+{#    background-color: #f4f4f9;#}
+{#    color: #333;#}
+{#  }#}
+
+{#  .container {#}
+{#    max-width: 1000px;#}
+{#    margin: auto;#}
+{#    background: #fff;#}
+{#    padding: 20px;#}
+{#    border-radius: 10px;#}
+{#    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);#}
+{#  }#}
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background: #4a69bd;
+    color: white;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background: #f8f9fa;
+  }
+
+  tr:hover {
+    background: #dfe6e9;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 15px;
+    background: #4a69bd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  input[type="submit"]:hover {
+    background: #3b5998;
+  }
+
+  a {
+    text-decoration: none;
+    color: #4a69bd;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .actions p {
+    margin: 5px 0;
+  }
+</style>
+
+<div class="container">
+  <form id="form1" name="form1" method="post" action="/admin_search_company_verify">
+    <label>
+      Name:
+      <input type="text" name="textfield" value="{{ name }}" />
+    </label>
+    <input type="submit" name="Submit" value="Submit" />
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>E-mail</th>
+        <th>Website</th>
+        <th>Actions</th>
+      </tr>
+      {% for i in data %}
+      <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.place }}<br>{{ i.pin }}<br>{{ i.post }}</td>
+        <td>{{ i.phone }}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.website }}</td>
+        <td class="actions">
+          {% if i.LOGIN.type == 'pending' %}
+            <p><a href="acceptcompany/{{ i.LOGIN.id }}">Accept</a></p>
+            <p><a href="rejectedcompany/{{ i.LOGIN.id }}">Reject</a></p>
+          {% elif i.LOGIN.type == 'company' %}
+            Accepted
+          {% else %}
+            {{ i.LOGIN.type }}
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </form>
+</div>
+
+{% endblock %}

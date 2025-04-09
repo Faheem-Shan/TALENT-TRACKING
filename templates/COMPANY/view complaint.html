@@ -1,0 +1,178 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#<meta charset="UTF-8">#}
+{#<title>Complaint Management</title>#}
+{#<style>#}
+{#  table {#}
+{#    width: 100%;#}
+{#    border-collapse: collapse;#}
+{#  }#}
+{#  table, th, td {#}
+{#    border: 1px solid black;#}
+{#  }#}
+{#  th, td {#}
+{#    padding: 10px;#}
+{#    text-align: left;#}
+{#  }#}
+{#  th {#}
+{#    background-color: #f2f2f2;#}
+{#  }#}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{#  <form id="form1" name="form1" method="post" action="">#}
+{#    <table>#}
+{#      <thead>#}
+{#        <tr>#}
+{#          <th scope="col">Candidate Name</th>#}
+{#          <th scope="col">Complaint</th>#}
+{#          <th scope="col">Date</th>#}
+{#          <th scope="col">Reply</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for i in val %}#}
+{#        <tr>#}
+{#          <td>{{ i.CANDIDATE.name }}</td>#}
+{#          <td>{{ i.complaint }}</td>#}
+{#          <td>{{ i.date }}</td>#}
+{#          <td>#}
+{#            {% if reply == 'pending' %}#}
+{#              <a href="/reply_complaint/{{ i.id }}">Reply</a>#}
+{#            {% else %}#}
+{#              <p>{{ i.reply }}</p>#}
+{#            {% endif %}#}
+{#          </td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#    </table>#}
+{#  </form>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complaint Management</title>
+  <style>
+    /* Resetting margins, padding, and box-sizing */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Form container styling */
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      font-size: 16px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    /* Alternate row coloring */
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    td {
+      color: #555;
+    }
+
+    /* Styling the Reply links */
+    td a {
+      text-decoration: none;
+      color: #007bff;
+      background-color: #e7f1ff;
+      padding: 6px 12px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    td a:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+
+    /* Styling the reply text */
+    td p {
+      color: #555;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="form1" name="form1" method="post" action="">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Candidate Name</th>
+          <th scope="col">Complaint</th>
+          <th scope="col">Date</th>
+          <th scope="col">Reply</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in val %}
+        <tr>
+          <td>{{ i.CANDIDATE.name }}</td>
+          <td>{{ i.complaint }}</td>
+          <td>{{ i.date }}</td>
+          <td>
+            {% if reply == 'pending' %}
+              <a href="/reply_complaint/{{ i.id }}">Reply</a>
+            {% else %}
+              <p>{{ i.reply }}</p>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </form>
+
+</body>
+</html>

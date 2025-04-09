@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Edit Profile</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        td {
+            padding: 10px;
+            font-size: 14px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        input[type="file"] {
+            padding: 8px;
+            font-size: 14px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .photo-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .photo-container img {
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        .readonly {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Profile</h2>
+        <form id="form1" name="form1" method="post" action="/edit_profile_action" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" value="{{ data.name }}" readonly class="readonly" /></td>
+                </tr>
+                <tr>
+                    <td>E-mail</td>
+                    <td><input type="text" name="email" value="{{ data.email }}" readonly class="readonly" /></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="text" name="phone" value="{{ data.phone }}" /></td>
+                </tr>
+                <tr>
+                    <td>Place</td>
+                    <td><input type="text" name="place" value="{{ data.place }}" /></td>
+                </tr>
+                <tr>
+                    <td>Pin</td>
+                    <td><input type="text" name="pin" value="{{ data.pin }}" /></td>
+                </tr>
+                <tr>
+                    <td>Post</td>
+                    <td><input type="text" name="post" value="{{ data.post }}" /></td>
+                </tr>
+                <tr>
+                    <td>Photo</td>
+                    <td>
+                        <div class="photo-container">
+                            <img src="{{ data.photo.url }}" height="100" width="100" alt="Profile Photo">
+                            <input type="file" name="image" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="text-align: right;">
+                            <input type="submit" name="Submit" value="Edit" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

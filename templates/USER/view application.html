@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Vacancy Management</title>
+    <style>
+        /* General reset and layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #40B3A2;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            color: #555;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #40B3A2;
+            padding: 8px 16px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive design for mobile screens */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Date</th>
+                    <th>Vacancy</th>
+                    <th>Details</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.VACANCY.COMPANY.name }}</td>
+                    <td>{{ i.VACANCY.date }}</td>
+                    <td>{{ i.VACANCY.vacancy }}</td>
+                    <td>{{ i.VACANCY.details }}</td>
+                    <td>{{ i.status }}</td>
+                    {% if i.status == "pending" %}
+                    <td>
+                        <a href="/user_view_test/{{ i.VACANCY.id }}" class="btn"> View Test</a>
+                    </td>
+                    {% elif i.status == "Direct Interview Call"  %}
+                     <td>
+                        <a href="/user_view_interview_call/{{ i.id }}" class="btn"> Interview info</a>
+                    </td>
+                    {% endif %}
+                  <td>
+                        <a href="/sendfeedback/{{ i.VACANCY.COMPANY.id }}" class="btn">Send Feedback</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

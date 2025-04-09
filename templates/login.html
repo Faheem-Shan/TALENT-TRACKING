@@ -1,0 +1,210 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Login Page</title>#}
+{#    <style>#}
+{#        /* General Reset */#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#            font-family: Arial, sans-serif;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            background-color: #f3f4f8;#}
+{#            display: flex;#}
+{#            justify-content: center;#}
+{#            align-items: center;#}
+{#            height: 100vh;#}
+{#        }#}
+{##}
+{#        .login-card {#}
+{#            background-color: #5f4b8b; /* Purple-blue card */#}
+{#            color: white;#}
+{#            border-radius: 10px;#}
+{#            padding: 30px;#}
+{#            width: 100%;#}
+{#            max-width: 400px;#}
+{#            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);#}
+{#        }#}
+{##}
+{#        h2 {#}
+{#            text-align: center;#}
+{#            margin-bottom: 20px;#}
+{#        }#}
+{##}
+{#        .login-card table {#}
+{#            width: 100%;#}
+{#            margin-bottom: 20px;#}
+{#        }#}
+{##}
+{#        .login-card td {#}
+{#            padding: 10px;#}
+{#            text-align: left;#}
+{#        }#}
+{##}
+{#        .login-card input[type="text"] {#}
+{#            width: 100%;#}
+{#            padding: 10px;#}
+{#            margin-top: 5px;#}
+{#            font-size: 14px;#}
+{#            border: 1px solid #ddd;#}
+{#            border-radius: 5px;#}
+{#            background-color: #f7f7f7;#}
+{#        }#}
+{##}
+{#        .login-card input[type="submit"] {#}
+{#            width: 100%;#}
+{#            padding: 10px;#}
+{#            background-color: #3b2a6a; /* Darker purple for button */#}
+{#            color: white;#}
+{#            border: none;#}
+{#            border-radius: 5px;#}
+{#            font-size: 16px;#}
+{#            font-weight: 600;#}
+{#            cursor: pointer;#}
+{#            margin-top: 15px;#}
+{#            transition: background-color 0.3s ease;#}
+{#        }#}
+{##}
+{#        .login-card input[type="submit"]:hover {#}
+{#            background-color: #2c1a4f;#}
+{#        }#}
+{##}
+{#        .login-card a {#}
+{#            color: white;#}
+{#            text-decoration: none;#}
+{#            font-size: 14px;#}
+{#            display: block;#}
+{#            text-align: center;#}
+{#            margin-top: 10px;#}
+{#            transition: color 0.3s ease;#}
+{#        }#}
+{##}
+{#        .login-card a:hover {#}
+{#            color: #e0c4e0; /* Light lavender color for hover */#}
+{#        }#}
+{##}
+{#        .login-card a:not(:last-child) {#}
+{#            margin-bottom: 10px;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#    <div class="login-card">#}
+{#        <h2>Login</h2>#}
+{#        <form action="/login_post" method="post">#}
+{#            <table>#}
+{#                <tr>#}
+{#                    <td>Username</td>#}
+{#                    <td><input type="text" name="textfield" required placeholder="Enter your email" /></td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td>Password</td>#}
+{#                    <td><input type="text" name="textfield2" required placeholder="Enter your passwrod"/></td>#}
+{#                </tr>#}
+{#            </table>#}
+{#            <input type="submit" name="Submit" value="Login" />#}
+{#            <a href="/company_ragistration">Company Registration</a>#}
+{#            <a href="/user_registration">Candidate Registration</a>#}
+{#        </form>#}
+{#    </div>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Talent Track</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="../static/login/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/login/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/login/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('../static/login/images/bg-01.jpg');">
+			<div class="wrap-login100 p-t-30 p-b-50">
+				<span class="login100-form-title p-b-41">
+					Account Login
+				</span>
+				<form class="login100-form validate-form p-b-33 p-t-5" action="/login_post" method="post">
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="textfield" placeholder="User name">
+						<span class="focus-input100" data-placeholder="&#xe82a;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="textfield2" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="container-login100-form-btn m-t-32">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+                    <div class="container-login100-form-btn m-t-32">
+						<a href="/company_ragistration">Company Registration</a>
+
+					</div>
+                    <div class="container-login100-form-btn m-t-32">
+						 <a href="/user_registration">Candidate Registration</a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../static/login/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/login/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/admin_search_course">#}
+{#  <table width="354" height="145" border="1">#}
+{#    <tr>#}
+{#      <td colspan="3">name#}
+{#        <label>#}
+{#        <input type="text" name="textfield" value="{{ course }}" />#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{##}
+{#      <td width="71">Course</td>#}
+{#      <td width="66">Details</td>#}
+{#      <td width="80"></td>#}
+{#    </tr>#}
+{#      {% for i in val %}#}
+{#    <tr>#}
+{#    <tr>#}
+{#      <td colspan="5"><a href="/admin_add_course">Add new</a></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+{##}
+{#{% extends 'ADMIN/loginindex.html' %}#}
+{#{% block body %}#}
+{#<title>Course Management</title>#}
+{#<style>#}
+{#  body {#}
+{#    font-family: Arial, sans-serif;#}
+{#    background-color: #f0f8ff;#}
+{#    margin: 20px;#}
+{#    color: #333;#}
+{#  }#}
+{##}
+{#  table {#}
+{#    width: 100%;#}
+{#    border-collapse: collapse;#}
+{#    background-color: #ffffff;#}
+{#    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);#}
+{#  }#}
+{##}
+{#  table, th, td {#}
+{#    border: 1px solid #ddd;#}
+{#  }#}
+{##}
+{#  th, td {#}
+{#    padding: 10px;#}
+{#    text-align: left;#}
+{#  }#}
+{##}
+{#  th {#}
+{#    background-color: #4CAF50;#}
+{#    color: white;#}
+{#  }#}
+{##}
+{#  tr:nth-child(even) {#}
+{#    background-color: #f9f9f9;#}
+{#  }#}
+{##}
+{#  tr:hover {#}
+{#    background-color: #f1f1f1;#}
+{#  }#}
+{##}
+{#  input[type="text"] {#}
+{#    padding: 5px;#}
+{#    width: 70%;#}
+{#    border: 1px solid #ccc;#}
+{#    border-radius: 4px;#}
+{#  }#}
+{##}
+{#  input[type="submit"] {#}
+{#    padding: 5px 10px;#}
+{#    background-color: #4CAF50;#}
+{#    color: white;#}
+{#    border: none;#}
+{#    border-radius: 4px;#}
+{#    cursor: pointer;#}
+{#  }#}
+{##}
+{#  input[type="submit"]:hover {#}
+{#    background-color: #45a049;#}
+{#  }#}
+{##}
+{#  a {#}
+{#    text-decoration: none;#}
+{#    color: #007bff;#}
+{#    font-weight: bold;#}
+{#  }#}
+{##}
+{#  a:hover {#}
+{#    color: #0056b3;#}
+{#    text-decoration: underline;#}
+{#  }#}
+{##}
+{#  .actions p {#}
+{#    margin: 5px 0;#}
+{#  }#}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/admin_search_course">#}
+{#  <table>#}
+{#    <tr>#}
+{#      <td colspan="3">#}
+{#        <label>#}
+{#          Course Name:#}
+{#          <input type="text" name="textfield" value="{{ course }}" />#}
+{#        </label>#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <th>Course</th>#}
+{#      <th>Details</th>#}
+{#      <th>Actions</th>#}
+{#    </tr>#}
+{#    {% for i in val %}#}
+{#    <tr>#}
+{#      <td>{{ i.course }}</td>#}
+{#      <td>{{ i.course_details }}</td>#}
+{#      <td class="actions">#}
+{#        <p><a href="/admin_edit_course/{{ i.id }}">Edit</a></p>#}
+{#        <p><a href="/delete_course/{{ i.id }}">Delete</a></p>#}
+{#      </td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{#    <tr>#}
+{#      <td colspan="3"><a href="/admin_add_course">Add new</a></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#{% endblock %}#}
+{##}
+
+
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/admin_search_course">#}
+{#  <table width="354" height="145" border="1">#}
+{#    <tr>#}
+{#      <td colspan="3">name#}
+{#        <label>#}
+{#        <input type="text" name="textfield" value="{{ course }}" />#}
+{#        <input type="submit" name="Submit" value="Submit" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{##}
+{#      <td width="71">Course</td>#}
+{#      <td width="66">Details</td>#}
+{#      <td width="80"></td>#}
+{#    </tr>#}
+{#      {% for i in val %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ i.course }}</td>#}
+{#      <td>&nbsp;{{ i.course_details }}</td>#}
+{#     <td width="80"><p><a href="/admin_edit_course/{{ i.id }}">Edit</a></p>#}
+{#         <p><a href="/delete_course/{{ i.id }}">Delete</a></p></td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#    <tr>#}
+{#      <td colspan="5"><a href="/admin_add_course">Add new</a></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+{% extends 'ADMIN/index.html' %}
+{% block body %}
+<title>Course Management</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 20px;
+    color: #333;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #002244;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  input[type="text"] {
+    padding: 5px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  input[type="submit"] {
+    padding: 5px 10px;
+    background-color: #002244;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #002244;
+  }
+
+  a {
+    text-decoration: none;
+    color: #40B3A2;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+
+  .actions p {
+    margin: 5px 0;
+  }
+</style>
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="/admin_search_course">
+  <table>
+    <tr>
+      <td colspan="3">
+        <label>
+          Course Name:
+          <input type="text" name="textfield" value="{{ course }}" />
+        </label>
+        <input type="submit" name="Submit" value="Submit" />
+      </td>
+    </tr>
+    <tr>
+      <th>Course</th>
+      <th>Details</th>
+      <th>Actions</th>
+    </tr>
+    {% for i in val %}
+    <tr>
+      <td>{{ i.course }}</td>
+      <td>{{ i.course_details }}</td>
+      <td class="actions">
+        <p><a href="/admin_edit_course/{{ i.id }}">Edit</a></p>
+        <p><a href="/delete_course/{{ i.id }}">Delete</a></p>
+      </td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="3"><a href="/admin_add_course">Add new</a></td>
+    </tr>
+  </table>
+</form>
+</body>
+{% endblock %}

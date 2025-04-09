@@ -1,0 +1,230 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/add_question_post">#}
+{#  <table width="237" border="1">#}
+{#    <tr>#}
+{#      <td>Test</td>#}
+{#      <td><label>#}
+{#        <select name="select">#}
+{#            {% for i in val %}#}
+{#          <option value="{{ i.id }}" >{{ i.test }}</option>#}
+{#          {% endfor %}#}
+{#        </select>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td width="72">Question</td>#}
+{#      <td width="149"><label>#}
+{#        <input type="text" name="textfield" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 1 </td>#}
+{#      <td><input type="text" name="textfield2" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 2 </td>#}
+{#      <td><input type="text" name="textfield3" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 3 </td>#}
+{#      <td><input type="text" name="textfield4" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Option 4 </td>#}
+{#      <td><input type="text" name="textfield5" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Answer</td>#}
+{#      <td><input type="text" name="textfield6" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td colspan="2"><label>#}
+{#        <div align="center">#}
+{#          <input type="submit" name="Submit" value="Add" />#}
+{#        </div>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+{##}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>MCQ Question Add Form</title>
+  <style>
+    /* Resetting margins, padding, and box-sizing */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Form container styling */
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    td {
+      padding: 12px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    td label {
+      font-weight: bold;
+      color: #444;
+    }
+
+    td input[type="text"], td select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+      transition: all 0.3s;
+    }
+
+    td input[type="text"]:focus, td select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    td input[type="submit"] {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    td input[type="submit"]:hover {
+      background-color: #218838;
+    }
+
+    /* Add spacing and style for button */
+    div.align-center {
+      text-align: center;
+    }
+
+    /* Styling for select dropdown */
+    select {
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <form id="form1" name="form1" method="post" action="/add_question_post">
+    <table>
+{#      <tr>#}
+{#        <td>Test</td>#}
+{#        <td>#}
+{#          <label>#}
+{#            <select name="select">#}
+{#              {% for i in val %}#}
+{#                <option value="{{ i.id }}">{{ i.test }}</option>#}
+{#              {% endfor %}#}
+{#            </select>#}
+{#          </label>#}
+{#        </td>#}
+{#      </tr>#}
+      <tr>
+        <td width="72">Question</td>
+        <td width="149">
+          <label>
+            <input type="text" name="textfield" placeholder="Enter Question" required />
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Option 1</td>
+        <td>
+          <input type="text" name="textfield2" placeholder="Enter Option 1" required />
+        </td>
+      </tr>
+      <tr>
+        <td>Option 2</td>
+        <td>
+          <input type="text" name="textfield3" placeholder="Enter Option 2" required />
+        </td>
+      </tr>
+      <tr>
+        <td>Option 3</td>
+        <td>
+          <input type="text" name="textfield4" placeholder="Enter Option 3" required />
+        </td>
+      </tr>
+      <tr>
+        <td>Option 4</td>
+        <td>
+          <input type="text" name="textfield5" placeholder="Enter Option 4" required />
+        </td>
+      </tr>
+      <tr>
+        <td>Answer</td>
+        <td>
+          <input type="text" name="textfield6" placeholder="Enter Correct Answer" required />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="align-center">
+            <input type="submit" name="Submit" value="Add Question" />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>

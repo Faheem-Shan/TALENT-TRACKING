@@ -1,0 +1,382 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="/edit_profile_post">#}
+{#  <table width="228" height="191" border="1">#}
+{#    <tr>#}
+{#      <td width="68">Name</td>#}
+{#      <td width="144"><label>#}
+{#        <input type="text" name="textfield"  value="{{ val.name }}"/>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Place</td>#}
+{#      <td><label>#}
+{#      <input type="text" name="textfield2"  value="{{ val.place }}"/>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Pin</td>#}
+{#      <td><label>#}
+{#      <input type="text" name="textfield3" value="{{ val.pin }}" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Post</td>#}
+{#      <td><label>#}
+{#      <input type="text" name="textfield4" value="{{ val.post }}" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Phone</td>#}
+{#      <td><label>#}
+{#      <input type="text" name="textfield5" value="{{ val.phone }}" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>E-mail</td>#}
+{#      <td><label>#}
+{#        <input type="text" name="textfield6" value="{{ val.email }}" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Website</td>#}
+{#      <td><label>#}
+{#        <input type="text" name="textfield7" value="{{ val.website }}" />#}
+{#      </label></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td colspan="2"><label>#}
+{#        <div align="center">#}
+{#          <input type="submit" name="Submit" value="Update" />#}
+{#          </div>#}
+{#      </label></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#<meta charset="UTF-8">#}
+{#<meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#<title>Edit Company Profile</title>#}
+{#<style>#}
+{#  body {#}
+{#    font-family: Arial, sans-serif;#}
+{#    background-color: #f5f5f5;#}
+{#    margin: 0;#}
+{#    padding: 0;#}
+{#    display: flex;#}
+{#    justify-content: center;#}
+{#    align-items: center;#}
+{#    height: 100vh;#}
+{#  }#}
+{##}
+{#  .card {#}
+{#    background-color: #ffffff;#}
+{#    width: 100%;#}
+{#    max-width: 400px;#}
+{#    border-radius: 10px;#}
+{#    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);#}
+{#    overflow: hidden;#}
+{#  }#}
+{##}
+{#  .card-header {#}
+{#    text-align: center;#}
+{#    padding: 20px 15px;#}
+{#    border-bottom: 1px solid #e0e0e0;#}
+{#  }#}
+{##}
+{#  .card-header h2 {#}
+{#    margin: 0;#}
+{#    font-size: 18px;#}
+{#    font-weight: bold;#}
+{#    color: #333333;#}
+{#  }#}
+{##}
+{#  .card-body {#}
+{#    padding: 20px;#}
+{#  }#}
+{##}
+{#  .form-group {#}
+{#    margin-bottom: 15px;#}
+{#  }#}
+{##}
+{#  .form-group label {#}
+{#    display: block;#}
+{#    font-size: 14px;#}
+{#    font-weight: bold;#}
+{#    color: #555555;#}
+{#    margin-bottom: 5px;#}
+{#  }#}
+{##}
+{#  .form-group input {#}
+{#    width: 100%;#}
+{#    padding: 10px 12px;#}
+{#    font-size: 14px;#}
+{#    color: #333333;#}
+{#    border: 1px solid #ddd;#}
+{#    border-radius: 5px;#}
+{#    transition: border-color 0.3s;#}
+{#    box-sizing: border-box;#}
+{#  }#}
+{##}
+{#  .form-group input:focus {#}
+{#    border-color: #4CAF50;#}
+{#    outline: none;#}
+{#  }#}
+{##}
+{#  .card-footer {#}
+{#    padding: 15px;#}
+{#    border-top: 1px solid #e0e0e0;#}
+{#    text-align: center;#}
+{#  }#}
+{##}
+{#  .card-footer input[type="submit"] {#}
+{#    background-color: #4CAF50;#}
+{#    color: white;#}
+{#    border: none;#}
+{#    padding: 10px 20px;#}
+{#    font-size: 14px;#}
+{#    font-weight: bold;#}
+{#    border-radius: 5px;#}
+{#    cursor: pointer;#}
+{#    transition: background-color 0.3s;#}
+{#  }#}
+{##}
+{#  .card-footer input[type="submit"]:hover {#}
+{#    background-color: #45a049;#}
+{#  }#}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{#  <div class="card">#}
+{#    <div class="card-header">#}
+{#      <h2>Edit Company Profile</h2>#}
+{#    </div>#}
+{#    <form id="form1" name="form1" method="post" action="/edit_profile_post">#}
+{#      <div class="card-body">#}
+{#        <div class="form-group">#}
+{#          <label for="name">Name</label>#}
+{#          <input type="text" id="name" name="textfield" value="{{ val.name }}" />#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#          <label for="place">Place</label>#}
+{#          <input type="text" id="place" name="textfield2" value="{{ val.place }}" />#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#          <label for="pin">Pin</label>#}
+{#          <input type="text" id="pin" name="textfield3" value="{{ val.pin }}" />#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#          <label for="post">Post</label>#}
+{#          <input type="text" id="post" name="textfield4" value="{{ val.post }}" />#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#          <label for="phone">Phone</label>#}
+{#          <input type="text" id="phone" name="textfield5" value="{{ val.phone }}" />#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#          <label for="email">E-mail</label>#}
+{#          <input type="text" id="email" name="textfield6" value="{{ val.email }}" />#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#          <label for="website">Website</label>#}
+{#          <input type="text" id="website" name="textfield7" value="{{ val.website }}" />#}
+{#        </div>#}
+{#      </div>#}
+{#      <div class="card-footer">#}
+{#        <input type="submit" name="Submit" value="Update" />#}
+{#      </div>#}
+{#    </form>#}
+{#  </div>#}
+{#</body>#}
+{#</html>#}
+{##}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Edit Profile</title>
+
+<!-- Google Fonts Link for Akony Font -->
+<link href="https://fonts.googleapis.com/css2?family=Akony&display=swap" rel="stylesheet">
+
+<style>
+  /* General body styling */
+  body {
+    font-family: 'Akony', sans-serif;
+    background-color: #efefef;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Card container */
+  .card {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+
+  /* Heading styling (now with Akony font and bold) */
+  .card h1 {
+    font-family: "sans-serif";  /* Apply Akony font to the heading */
+    color: rgba(56, 37, 179, 0.84);
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;  /* Make the font bold */
+  }
+
+  /* Table and cell styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td {
+    padding: 12px;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  td:first-child {
+    width: 25%;
+    font-weight: 600;
+  }
+
+  td:last-child {
+    width: 75%;
+  }
+
+  /* Input field styling */
+  input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+
+  input[type="text"]:focus {
+    border-color: #f0f4f8;
+    outline: none;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #002244;
+  }
+
+  /* Label styling */
+  label {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    table td {
+      font-size: 1rem;
+    }
+
+    input[type="text"], input[type="submit"] {
+      padding: 10px;
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <div class="card">
+    <!-- Card Heading -->
+    <h1>Company Profile</h1>
+
+    <!-- Form to edit profile -->
+    <form id="form1" name="form1" method="post" action="/edit_profile_post">
+      <table>
+        <tr>
+          <td>Name</td>
+          <td><label>
+            <input type="text" name="textfield" value="{{ val.name }}"/>
+          </label></td>
+        </tr>
+        <tr>
+          <td>Place</td>
+          <td><label>
+            <input type="text" name="textfield2" value="{{ val.place }}"/>
+          </label></td>
+        </tr>
+        <tr>
+          <td>Pin</td>
+          <td><label>
+            <input type="text" name="textfield3" value="{{ val.pin }}"/>
+          </label></td>
+        </tr>
+        <tr>
+          <td>Post</td>
+          <td><label>
+            <input type="text" name="textfield4" value="{{ val.post }}"/>
+          </label></td>
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td><label>
+            <input type="text" name="textfield5" value="{{ val.phone }}"/>
+          </label></td>
+        </tr>
+        <tr>
+          <td>E-mail</td>
+          <td><label>
+            <input type="text" name="textfield6" value="{{ val.email }}"/>
+          </label></td>
+        </tr>
+        <tr>
+          <td>Website</td>
+          <td><label>
+            <input type="text" name="textfield7" value="{{ val.website }}"/>
+          </label></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <input type="submit" name="Submit" value="Update"/>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</body>
+</html>

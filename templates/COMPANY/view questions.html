@@ -1,0 +1,200 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body><form action="" method="get"><table width="501" height="156" border="1">#}
+{#  <tr>#}
+{#    <td width="60">Questions</td>#}
+{#    <td width="55">Option 1 </td>#}
+{#    <td width="55">Option 2 </td>#}
+{#    <td width="55">Option 3 </td>#}
+{#    <td width="55">Option 4 </td>#}
+{#    <td width="47">Answer</td>#}
+{#    <td width="62"></td>#}
+{#  </tr>#}
+{#    {% for i in val %}#}
+{#  <tr>#}
+{#    <td>{{ i.questions }}</td>#}
+{#    <td>{{ i.option_1 }}</td>#}
+{#    <td>{{ i.option_2 }}</td>#}
+{#    <td>{{ i.option_3 }}</td>#}
+{#    <td>{{ i.option_4 }}</td>#}
+{#    <td>{{ i.answer }}</td>#}
+{#    <td><p><a href="/edit_question/{{ i.id }}">edit</a></p>#}
+{#        <p><a href="/delete_questions/{{ i.id }}">delete</a></p></td>#}
+{#  </tr>#}
+{#    {% endfor %}#}
+{#  <tr>#}
+{#    <td height="37" colspan="8"><a href="/add_question">Add</a></td>#}
+{#    </tr>#}
+{#</table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>MCQ Question Management</title>
+<style>
+    /* Resetting margins, padding, and box-sizing */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    /* Form container styling */
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 960px;
+        margin-top: 30px;
+    }
+
+    /* Table styling */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        font-size: 16px;
+        border: 1px solid #e2e8f0;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    /* Alternating row colors and hover effect */
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    td {
+        color: #555;
+    }
+
+    /* Styling the Action buttons */
+    .actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .actions a {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .actions a:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .actions a.delete {
+        background-color: #f44336;
+    }
+
+    .actions a.delete:hover {
+        background-color: #e53935;
+    }
+
+    /* Add button styling */
+    .add-link {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .add-link a {
+        background-color: #28a745;
+        color: white;
+        font-weight: 600;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 16px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .add-link a:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+
+</style>
+</head>
+
+<body>
+<form action="" method="get">
+  <table>
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Option 1</th>
+        <th>Option 2</th>
+        <th>Option 3</th>
+        <th>Option 4</th>
+        <th>Answer</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in val %}
+        <tr>
+          <td>{{ i.questions }}</td>
+          <td>{{ i.option_1 }}</td>
+          <td>{{ i.option_2 }}</td>
+          <td>{{ i.option_3 }}</td>
+          <td>{{ i.option_4 }}</td>
+          <td>{{ i.answer }}</td>
+          <td class="actions">
+            <a href="/edit_question/{{ i.id }}">Edit</a>
+            <a href="/delete_questions/{{ i.id }}" class="delete">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="add-link">
+    <a href="/add_question">Add New Question</a>
+  </div>
+</form>
+</body>
+</html>
+

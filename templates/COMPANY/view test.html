@@ -1,0 +1,839 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Untitled Document</title>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#  <table width="441" height="134" border="1">#}
+{#    <tr>#}
+{#      <td width="91">Vacancy</td>#}
+{#      <td width="82">Test</td>#}
+{#      <td width="81">Description</td>#}
+{#      <td width="60">&nbsp;</td>#}
+{#      <td width="93">&nbsp;</td>#}
+{#    </tr>#}
+{#      {% for i in val %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ i.VACANCY.vacancy }}</td>#}
+{#      <td>&nbsp;{{ i.test_name }}</td>#}
+{#      <td>&nbsp;{{ i.description }}</td>#}
+{#      <td><p><a href="/edit_test/{{ i.id }}">edit</a></p>#}
+{#      <p><a href="/delete_test/{{ i.id }}">delete</a></p></td>#}
+{#      <td><a href="/view_questions/{{ i.id }}">add questions</a></td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#    <tr>#}
+{#      <td colspan="5"><a href="/add_test">add test</a></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#<meta charset="UTF-8">#}
+{#<title>Test Management</title>#}
+{#<style>#}
+{#    * {#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    body {#}
+{#        font-family: 'Arial', sans-serif;#}
+{#        background-color: #f4f7fc;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        min-height: 100vh;#}
+{#        padding: 20px;#}
+{#    }#}
+{##}
+{#    form {#}
+{#        background: #ffffff;#}
+{#        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);#}
+{#        border-radius: 8px;#}
+{#        padding: 25px;#}
+{#        width: 100%;#}
+{#        max-width: 960px;#}
+{#    }#}
+{##}
+{#    table {#}
+{#        width: 100%;#}
+{#        border-collapse: collapse;#}
+{#    }#}
+{##}
+{#    th, td {#}
+{#        padding: 12px 20px;#}
+{#        text-align: left;#}
+{#        border: 1px solid #ddd;#}
+{#    }#}
+{##}
+{#    th {#}
+{#        background-color: #4CAF50;#}
+{#        color: white;#}
+{#        font-weight: bold;#}
+{#        text-transform: uppercase;#}
+{#    }#}
+{##}
+{#    tr:nth-child(even) {#}
+{#        background-color: #f9f9f9;#}
+{#    }#}
+{##}
+{#    tr:hover {#}
+{#        background-color: #f1f1f1;#}
+{#    }#}
+{##}
+{#    td {#}
+{#        font-size: 14px;#}
+{#    }#}
+{##}
+{#    .actions a {#}
+{#        color: #007bff;#}
+{#        text-decoration: none;#}
+{#        padding: 6px 12px;#}
+{#        border-radius: 4px;#}
+{#        background-color: #f1f1f1;#}
+{#        margin-right: 8px;#}
+{#        transition: background-color 0.3s, color 0.3s;#}
+{#    }#}
+{##}
+{#    .actions a:hover {#}
+{#        background-color: #007bff;#}
+{#        color: white;#}
+{#        text-decoration: none;#}
+{#    }#}
+{##}
+{#    .add-link {#}
+{#        text-align: right;#}
+{#        margin-top: 20px;#}
+{#    }#}
+{##}
+{#    .add-link a {#}
+{#        color: #28a745;#}
+{#        font-weight: bold;#}
+{#        font-size: 16px;#}
+{#        text-decoration: none;#}
+{#    }#}
+{##}
+{#    .add-link a:hover {#}
+{#        text-decoration: underline;#}
+{#    }#}
+{##}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#  <table>#}
+{#    <thead>#}
+{#      <tr>#}
+{#        <th>Vacancy</th>#}
+{#        <th>Test</th>#}
+{#        <th>Description</th>#}
+{#        <th>Actions</th>#}
+{#        <th>Add Questions</th>#}
+{#      </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#      {% for i in val %}#}
+{#        <tr>#}
+{#          <td>{{ i.VACANCY.vacancy }}</td>#}
+{#          <td>{{ i.test_name }}</td>#}
+{#          <td>{{ i.description }}</td>#}
+{#          <td class="actions">#}
+{#            <a href="/edit_test/{{ i.id }}">Edit</a>#}
+{#            <a href="/delete_test/{{ i.id }}">Delete</a>#}
+{#          </td>#}
+{#          <td>#}
+{#            <a href="/view_questions/{{ i.id }}">Add Questions</a>#}
+{#          </td>#}
+{#        </tr>#}
+{#      {% endfor %}#}
+{#    </tbody>#}
+{#    <tfoot>#}
+{#      <tr>#}
+{#        <td colspan="5" class="add-link">#}
+{#          <a href="/add_test">Add Test</a>#}
+{#        </td>#}
+{#      </tr>#}
+{#    </tfoot>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+{##}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Test Management</title>#}
+{#<style>#}
+{#    * {#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    body {#}
+{#        font-family: 'Arial', sans-serif;#}
+{#        background-color: #f4f7fc;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        min-height: 100vh;#}
+{#        padding: 20px;#}
+{#    }#}
+{##}
+{#    form {#}
+{#        background: #ffffff;#}
+{#        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);#}
+{#        border-radius: 10px;#}
+{#        padding: 25px;#}
+{#        width: 100%;#}
+{#        max-width: 960px;#}
+{#    }#}
+{##}
+{#    table {#}
+{#        width: 100%;#}
+{#        border-collapse: separate;#}
+{#        border-spacing: 0;#}
+{#        border-radius: 10px;#}
+{#        overflow: hidden;#}
+{#    }#}
+{##}
+{#    th, td {#}
+{#        padding: 15px 20px;#}
+{#        text-align: left;#}
+{#        border-bottom: 1px solid #ddd;#}
+{#    }#}
+{##}
+{#    th {#}
+{#        background-color: #4CAF50;#}
+{#        color: white;#}
+{#        font-weight: bold;#}
+{#        text-transform: uppercase;#}
+{#        letter-spacing: 1px;#}
+{#    }#}
+{##}
+{#    tr:nth-child(even) {#}
+{#        background-color: #f9f9f9;#}
+{#    }#}
+{##}
+{#    tr:hover {#}
+{#        background-color: #f1f1f1;#}
+{#    }#}
+{##}
+{#    td {#}
+{#        font-size: 14px;#}
+{#        color: #333;#}
+{#    }#}
+{##}
+{#    .actions a {#}
+{#        color: #fff;#}
+{#        text-decoration: none;#}
+{#        padding: 8px 16px;#}
+{#        border-radius: 5px;#}
+{#        transition: background-color 0.3s, transform 0.2s ease-in-out;#}
+{#        display: inline-block;#}
+{#    }#}
+{##}
+{#    .actions a.edit {#}
+{#        background-color: #007bff;#}
+{#    }#}
+{##}
+{#    .actions a.delete {#}
+{#        background-color: #dc3545;#}
+{#    }#}
+{##}
+{#    .actions a.add-questions {#}
+{#        background-color: #28a745;#}
+{#    }#}
+{##}
+{#    .actions a:hover {#}
+{#        transform: scale(1.1); /* Adds zoom effect */#}
+{#    }#}
+{##}
+{#    .actions a.edit:hover {#}
+{#        background-color: #0056b3;#}
+{#    }#}
+{##}
+{#    .actions a.delete:hover {#}
+{#        background-color: #c82333;#}
+{#    }#}
+{##}
+{#    .actions a.add-questions:hover {#}
+{#        background-color: #218838;#}
+{#    }#}
+{##}
+{#    .add-link {#}
+{#        text-align: center;#}
+{#        margin-top: 30px; /* Give some spacing from the table */#}
+{#    }#}
+{##}
+{#    .add-link a {#}
+{#        color: #ffffff;#}
+{#        background-color: #28a745;#}
+{#        font-weight: bold;#}
+{#        font-size: 18px;#}
+{#        text-decoration: none;#}
+{#        padding: 12px 30px;#}
+{#        border-radius: 5px;#}
+{#        display: inline-block;#}
+{#        transition: background-color 0.3s, transform 0.3s ease-in-out;#}
+{#    }#}
+{##}
+{#    .add-link a:hover {#}
+{#        background-color: #218838;#}
+{#        transform: scale(1.1); /* Slight zoom effect on hover */#}
+{#    }#}
+{##}
+{#    .add-link a:focus {#}
+{#        outline: none;#}
+{#    }#}
+{##}
+{#    .action-buttons {#}
+{#        display: flex;#}
+{#        flex-direction: column;#}
+{#        gap: 10px;#}
+{#    }#}
+{##}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#  <table>#}
+{#    <thead>#}
+{#      <tr>#}
+{#        <th>Vacancy</th>#}
+{#        <th>Test</th>#}
+{#        <th>Description</th>#}
+{#        <th>Actions</th>#}
+{#      </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#      {% for i in val %}#}
+{#        <tr>#}
+{#          <td>{{ i.VACANCY.vacancy }}</td>#}
+{#          <td>{{ i.test_name }}</td>#}
+{#          <td>{{ i.description }}</td>#}
+{#          <td class="actions">#}
+{#            <div class="action-buttons">#}
+{#              <a href="/edit_test/{{ i.id }}" class="edit">Edit</a>#}
+{#              <a href="/delete_test/{{ i.id }}" class="delete">Delete</a>#}
+{#              <a href="/view_questions/{{ i.id }}" class="add-questions">Add Questions</a>#}
+{#            </div>#}
+{#          </td>#}
+{#        </tr>#}
+{#      {% endfor %}#}
+{#    </tbody>#}
+{#    <tfoot>#}
+{#      <tr>#}
+{#        <td colspan="4" class="add-link">#}
+{#          <a href="/add_test">Add Test</a>#}
+{#        </td>#}
+{#      </tr>#}
+{#    </tfoot>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+{##}
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />#}
+{#<title>Test Management</title>#}
+{#<style>#}
+{#    * {#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    body {#}
+{#        font-family: 'Arial', sans-serif;#}
+{#        background-color: #f4f7fc;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        min-height: 100vh;#}
+{#        padding: 20px;#}
+{#    }#}
+{##}
+{#    form {#}
+{#        background: #ffffff;#}
+{#        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);#}
+{#        border-radius: 10px;#}
+{#        padding: 25px;#}
+{#        width: 100%;#}
+{#        max-width: 960px;#}
+{#    }#}
+{##}
+{#    table {#}
+{#        width: 100%;#}
+{#        border-collapse: separate;#}
+{#        border-spacing: 0;#}
+{#        border-radius: 10px;#}
+{#        overflow: hidden;#}
+{#    }#}
+{##}
+{#    th, td {#}
+{#        padding: 15px 20px;#}
+{#        text-align: left;#}
+{#        border-bottom: 1px solid #ddd;#}
+{#    }#}
+{##}
+{#    th {#}
+{#        background-color: #4CAF50;#}
+{#        color: white;#}
+{#        font-weight: bold;#}
+{#        text-transform: uppercase;#}
+{#        letter-spacing: 1px;#}
+{#    }#}
+{##}
+{#    tr:nth-child(even) {#}
+{#        background-color: #f9f9f9;#}
+{#    }#}
+{##}
+{#    tr:hover {#}
+{#        background-color: #f1f1f1;#}
+{#    }#}
+{##}
+{#    td {#}
+{#        font-size: 14px;#}
+{#        color: #333;#}
+{#    }#}
+{##}
+{#    .action-buttons {#}
+{#        display: flex;#}
+{#        flex-direction: column;#}
+{#        gap: 10px;#}
+{#    }#}
+{##}
+{#    /* Button styles */#}
+{#    .Btn {#}
+{#        position: relative;#}
+{#        display: flex;#}
+{#        align-items: center;#}
+{#        justify-content: flex-start;#}
+{#        width: 100px;#}
+{#        height: 40px;#}
+{#        border: none;#}
+{#        padding: 0px 20px;#}
+{#        background-color: rgb(168, 38, 255);#}
+{#        color: white;#}
+{#        font-weight: 500;#}
+{#        cursor: pointer;#}
+{#        border-radius: 10px;#}
+{#        box-shadow: 5px 5px 0px rgb(140, 32, 212);#}
+{#        transition-duration: .3s;#}
+{#    }#}
+{##}
+{#    .svg {#}
+{#        width: 13px;#}
+{#        position: absolute;#}
+{#        right: 0;#}
+{#        margin-right: 20px;#}
+{#        fill: white;#}
+{#        transition-duration: .3s;#}
+{#    }#}
+{##}
+{#    .Btn:hover {#}
+{#        color: transparent;#}
+{#    }#}
+{##}
+{#    .Btn:hover svg {#}
+{#        right: 43%;#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#        border: none;#}
+{#        transition-duration: .3s;#}
+{#    }#}
+{##}
+{#    .Btn:active {#}
+{#        transform: translate(3px , 3px);#}
+{#        transition-duration: .3s;#}
+{#        box-shadow: 2px 2px 0px rgb(140, 32, 212);#}
+{#    }#}
+{##}
+{#    /* Hover effects */#}
+{#    .actions a:hover {#}
+{#        transform: scale(1.1); /* Adds zoom effect */#}
+{#    }#}
+{##}
+{#    /* Tooltip button styling */#}
+{#    button {#}
+{#        display: flex;#}
+{#        flex-direction: column;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        padding: 1em;#}
+{#        border: 0px solid transparent;#}
+{#        background-color: rgba(100, 77, 237, 0.08);#}
+{#        border-radius: 1.25em;#}
+{#        transition: all 0.2s linear;#}
+{#    }#}
+{##}
+{#    button:hover {#}
+{#        box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),#}
+{#        8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),#}
+{#        17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),#}
+{#        36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),#}
+{#        99px 72px 143px rgba(0, 0, 0, 0.08);#}
+{#    }#}
+{##}
+{#    /* Tooltip styling */#}
+{#    .tooltip {#}
+{#        position: relative;#}
+{#        display: inline-block;#}
+{#    }#}
+{##}
+{#    .tooltip .tooltiptext {#}
+{#        visibility: hidden;#}
+{#        width: 4em;#}
+{#        background-color: rgba(0, 0, 0, 0.253);#}
+{#        color: #fff;#}
+{#        text-align: center;#}
+{#        border-radius: 6px;#}
+{#        padding: 5px 0;#}
+{#        position: absolute;#}
+{#        z-index: 1;#}
+{#        top: 25%;#}
+{#        left: 110%;#}
+{#    }#}
+{##}
+{#    .tooltip .tooltiptext::after {#}
+{#        content: "";#}
+{#        position: absolute;#}
+{#        top: 50%;#}
+{#        right: 100%;#}
+{#        margin-top: -5px;#}
+{#        border-width: 5px;#}
+{#        border-style: solid;#}
+{#        border-color: transparent rgba(0, 0, 0, 0.253) transparent transparent;#}
+{#    }#}
+{##}
+{#    .tooltip:hover .tooltiptext {#}
+{#        visibility: visible;#}
+{#    }#}
+{##}
+{#    .add-link {#}
+{#        text-align: center;#}
+{#        margin-top: 30px; /* Give some spacing from the table */#}
+{#    }#}
+{##}
+{#    .add-link a {#}
+{#        color: #ffffff;#}
+{#        background-color: #28a745;#}
+{#        font-weight: bold;#}
+{#        font-size: 18px;#}
+{#        text-decoration: none;#}
+{#        padding: 12px 30px;#}
+{#        border-radius: 5px;#}
+{#        display: inline-block;#}
+{#        transition: background-color 0.3s, transform 0.3s ease-in-out;#}
+{#    }#}
+{##}
+{#    .add-link a:hover {#}
+{#        background-color: #218838;#}
+{#        transform: scale(1.1); /* Slight zoom effect on hover */#}
+{#    }#}
+{##}
+{#    .add-link a:focus {#}
+{#        outline: none;#}
+{#    }#}
+{##}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form id="form1" name="form1" method="post" action="">#}
+{#  <table>#}
+{#    <thead>#}
+{#      <tr>#}
+{#        <th>Vacancy</th>#}
+{#        <th>Test</th>#}
+{#        <th>Description</th>#}
+{#        <th>Actions</th>#}
+{#      </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#      {% for i in val %}#}
+{#        <tr>#}
+{#          <td>{{ i.VACANCY.vacancy }}</td>#}
+{#          <td>{{ i.test_name }}</td>#}
+{#          <td>{{ i.description }}</td>#}
+{#          <td class="actions">#}
+{#            <div class="action-buttons">#}
+{#              <a href="/edit_test/{{ i.id }}" class="Btn">Edit#}
+{#                <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">#}
+{#                  <path d="M17.7,0.3c-0.8-0.8-2.1-0.8-2.8,0l-12,12c-0.3,0.3-0.5,0.7-0.6,1.1l-2,6.2c-0.1,0.4,0,0.8,0.3,1.1c0.2,0.2,0.5,0.3,0.8,0.3 c0.2,0,0.5-0.1,0.7-0.3l6.2-2c0.4-0.1,0.8-0.3,1.1-0.6l12-12c0.8-0.8,0.8-2.1,0-2.8L17.7,0.3z M13,4.8l5.2,5.2-3,3L10,7.8L13,4.8z M7.1,12.7l7.5,7.5-3.1,3.1-7.5-7.5L7.1,12.7z M2.9,18.3l1.1-3.5l3.5,3.5l-3.5,1.1L2.9,18.3z"></path>#}
+{#                </svg>#}
+{#              </a>#}
+{#              <div class="tooltip">#}
+{#                <button class="delete">#}
+{#                  Delete#}
+{#                </button>#}
+{#                <span class="tooltiptext">Delete Test</span>#}
+{#              </div>#}
+{#              <a href="/view_questions/{{ i.id }}" class="Btn">Add Questions</a>#}
+{#            </div>#}
+{#          </td>#}
+{#        </tr>#}
+{#      {% endfor %}#}
+{#    </tbody>#}
+{#    <tfoot>#}
+{#      <tr>#}
+{#        <td colspan="4" class="add-link">#}
+{#          <a href="/add_test">Add Test</a>#}
+{#        </td>#}
+{#      </tr>#}
+{#    </tfoot>#}
+{#  </table>#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Test Management</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7fc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    form {
+        background: #ffffff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 25px;
+        width: 100%;
+        max-width: 960px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 15px 20px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #002244;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    td {
+        font-size: 14px;
+        color: #002244;
+    }
+
+    .actions a {
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.2s ease-in-out;
+        display: inline-block;
+    }
+
+    .actions a.edit {
+        background-color: transparent;
+        color: #007bff;
+        border: 1px solid #007bff;
+    }
+
+    .actions a.delete {
+        background-color: transparent;
+        color: #dc3545;
+        border: 1px solid #dc3545;
+    }
+
+    .actions a.add-questions {
+        background-color: transparent;
+        color: #28a745;
+        border: 1px solid #28a745;
+    }
+
+    .actions a:hover {
+        transform: scale(1.1); /* Adds zoom effect */
+    }
+
+    .actions a.edit:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .actions a.delete:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .actions a.add-questions:hover {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .add-link {
+        text-align: center;
+        margin-top: 30px; /* Give some spacing from the table */
+    }
+
+    .add-link a {
+        color: #ffffff;
+        background-color: #40B3A2;
+        font-weight: bold;
+        font-size: 18px;
+        text-decoration: none;
+        padding: 12px 30px;
+        border-radius: 5px;
+        display: inline-block;
+        transition: background-color 0.3s, transform 0.3s ease-in-out;
+    }
+
+    .add-link a:hover {
+        background-color: #b6b6b4;
+        transform: scale(1.1); /* Slight zoom effect on hover */
+    }
+
+    .add-link a:focus {
+        outline: none;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Tooltip styling */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 4em;
+        background-color: rgba(0, 0, 0, 0.253);
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: 25%;
+        left: 110%;
+    }
+
+    .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent rgba(0, 0, 0, 0.253) transparent transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+
+</style>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <table>
+    <thead>
+      <tr>
+        <th>Vacancy</th>
+        <th>Test</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if val %}
+        {% for i in val %}
+          <tr>
+            <td>{{ i.VACANCY.vacancy }}</td>
+            <td>{{ i.test_name }}</td>
+            <td>{{ i.description }}</td>
+            <td class="actions">
+              <div class="action-buttons">
+                <a href="/edit_test/{{ i.id }}" class="edit tooltip">Edit
+                  <span class="tooltiptext">Edit this test</span>
+                </a>
+                <a href="/delete_test/{{ i.id }}" class="delete tooltip">Delete
+                  <span class="tooltiptext">Delete this test</span>
+                </a>
+                <a href="/view_questions/{{ i.id }}" class="add-questions tooltip">Add Questions
+                  <span class="tooltiptext">Add questions to this test</span>
+                </a>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="4">No data available</td>
+        </tr>
+      {% endif %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4" class="add-link">
+          <a href="/add_test">Add Test</a>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</form>
+</body>
+</html>

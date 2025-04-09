@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Interview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h3 class="text-center mb-4">Schedule Interview</h3>
+            <form id="form1" name="form1" method="post" action="/interviewCallpost">
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time</label>
+                    <input type="time" class="form-control" id="time" name="time" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">Schedule</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <br>
+   <form id="form1" name="form1" method="post" action="">
+  {% if data %}
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Test</th>
+          <th>Total Questions</th>
+          <th>Correct Answer</th>
+          <th>Incorrect Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in data %}
+          <tr>
+            <td>{{ i.test }}</td>
+            <td>{{ i.total }}</td>
+            <td>{{ i.correct }}</td>
+            <td>{{ i.incorrect }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No test attended yet.</p>
+  {% endif %}
+</form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

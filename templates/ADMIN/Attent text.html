@@ -1,0 +1,177 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Quiz</title>#}
+{#    <script>#}
+{#        let timeRemaining = 600; // 10 minutes for the quiz#}
+{#        let timerInterval;#}
+{##}
+{#        function startTimer() {#}
+{#            timerInterval = setInterval(function() {#}
+{#                timeRemaining--;#}
+{#                let minutes = Math.floor(timeRemaining / 60);#}
+{#                let seconds = timeRemaining % 60;#}
+{#                document.getElementById('timer').innerText = `${minutes}:${seconds}`;#}
+{##}
+{#                if (timeRemaining <= 0) {#}
+{#                    clearInterval(timerInterval);#}
+{#                    alert('Time is up!');#}
+{#                    document.getElementById('quiz-form').submit();#}
+{#                }#}
+{#            }, 1000);#}
+{#        }#}
+{##}
+{#        window.onload = startTimer;#}
+{#    </script>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Quiz for Candidate</h1>#}
+{#    <p>Time left: <span id="timer">10:00</span></p>#}
+{#    <form id="quiz-form" method="POST" action="submit_answers">#}
+{#        {% csrf_token %}#}
+{#        {% for question in questions %}#}
+{#            <div>#}
+{#                <p>{{ question.questions }}</p>#}
+{#                <label>#}
+{#                    <input type="radio" name="{{ question.id }}" value="{{ question.option_1 }}"> {{ question.option_1 }}#}
+{#                </label><br>#}
+{#                <label>#}
+{#                    <input type="radio" name="{{ question.id }}" value="{{ question.option_2 }}"> {{ question.option_2 }}#}
+{#                </label><br>#}
+{#                <label>#}
+{#                    <input type="radio" name="{{ question.id }}" value="{{ question.option_3 }}"> {{ question.option_3 }}#}
+{#                </label><br>#}
+{#                <label>#}
+{#                    <input type="radio" name="{{ question.id }}" value="{{ question.option_4 }}"> {{ question.option_4 }}#}
+{#                </label><br>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#        <button type="submit">Submit</button>#}
+{#    </form>#}
+{#</body>#}
+{#</html>#}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options {
+            margin: 10px 0;
+        }
+        .options label {
+            display: block;
+            padding: 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        .timer {
+            font-size: 18px;
+            color: #e74c3c;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        let timeRemaining = 600; // 10 minutes for the quiz
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(function() {
+                timeRemaining--;
+                let minutes = Math.floor(timeRemaining / 60);
+                let seconds = timeRemaining % 60;
+                document.getElementById('timer').innerText = `${minutes}:${seconds}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                    document.getElementById('quiz-form').submit();
+                }
+            }, 1000);
+        }
+
+        window.onload = startTimer;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Quiz for Candidate</h1>
+    </header>
+    <div class="container">
+        <p class="timer">Time left: <span id="timer">10:00</span></p>
+        <form id="quiz-form" method="POST" action="/submit_answers">
+            {% csrf_token %}
+            {% for question in questions %}
+                <div class="question">
+                <input  name="test_id" value="{{ question.id }}" type="hidden">
+                    <p>{{ question.questions }}</p>
+                    <div class="options">
+                        <label>
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_1 }}">
+                            {{ question.option_1 }}
+                        </label>
+                        <label>
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_2 }}">
+                            {{ question.option_2 }}
+                        </label>
+                        <label>
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_3 }}">
+                            {{ question.option_3 }}
+                        </label>
+                        <label>
+                            <input type="radio" name="question_{{ question.id }}" value="{{ question.option_4 }}">
+                            {{ question.option_4 }}
+                        </label>
+                    </div>
+                </div>
+            {% endfor %}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
