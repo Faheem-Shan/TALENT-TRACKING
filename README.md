@@ -156,13 +156,6 @@ Below are some of the critical endpoints routed through `myapp/appurl.py`:
 
 1. **AI-Powered Resume Parsing**: Extract skills and experience from uploaded PDF resumes automatically using machine learning libraries.
 2. **Email/SMS Alert Integration**: Incorporate transactional email alerts (e.g., SMTP or SendGrid) to immediately notify candidates of scheduled interviews.
-3. **AJAX-Based Search & Filters**: Improve the user experience with instant filtering of job listings and study courses.
-4. **Rich-Text Editor Integration**: Enable recruiters and administrators to write formatted, visual vacancy listings and articles.
-5. **Recruiting Analytics Dashboard**: Add clean visual charts detailing application rates, test passing percentages, and hiring funnels.
-6. **Video Call Integration**: Incorporate an iframe or secure API for conducting remote video interviews directly within the platform.
-7. **Candidate Portfolio Linkages**: Allow candidates to link their GitHub, LinkedIn, and portfolio websites directly to their profiles.
-
-## Project Status
-
-**Completed for Portfolio**
-The core functionality of the platform—including secure registration, vacancy tracking, automated screening tests, and interview scheduling—is fully developed, tested, and ready for showcase.
+3. **Recruiting Analytics Dashboard**: Add clean visual charts detailing application rates, test passing percentages, and hiring funnels.
+4. **Video Call Integration**: Incorporate an iframe or secure API for conducting remote video interviews directly within the platform.
+5. **Candidate Portfolio Linkages**: Allow candidates to link their GitHub, LinkedIn, and portfolio websites directly to their profiles.
