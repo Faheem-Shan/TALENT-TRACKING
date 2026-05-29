@@ -79,8 +79,7 @@ pip install django psycopg2-binary
 ```
 
 ### 4. Database Setup
-Create a PostgreSQL database named `talent_tracking` using pgAdmin or the PostgreSQL shell:
-```sql
+
 CREATE DATABASE talent_tracking;
 ```
 
