@@ -17,13 +17,13 @@ A modern, web-based recruitment and learning platform designed to streamline the
 
 * **Frontend**: HTML5, CSS3 , JavaScript
 * **Backend**: Django 5.1.4 (Python Web Framework)
-* **Database**: MySQL/PSQL
+* **Database**: MySQL
 * **Authentication**: Session-based secure user authentication managed by Django middleware
 
 ## How It Works
 
 ```text
-Candidate / Employer  ➔  Web Browser (Frontend)  ➔  Django Views (Backend)  ➔  PostgreSQL (Database)
+Candidate / Employer  ➔  Web Browser (Frontend)  ➔  Django Views (Backend)  ➔  MySQL (Database)
 ```
 
 1. **Registration & Verification**: Candidates and companies register. The Admin verifies and activates company accounts.
@@ -75,7 +75,7 @@ source venv/bin/activate
 
 ### 3. Install Required Dependencies
 ```bash
-pip install django psycopg2-binary
+pip install django mysqlclient
 ```
 
 ### 4. Database Setup
@@ -87,12 +87,12 @@ Update your database connection credentials in `jobseeker/settings.py` (lines 78
 ```python
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'talent_tracking',
-        'USER': 'your_postgres_username',
-        'PASSWORD': 'your_postgres_password',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'USER': 'root',
+        'PASSWORD': 'your_password',
+        'PORT': '3308',
     }
 }
 ```
@@ -123,12 +123,11 @@ For security and standard deployment practices, you can configure a `.env` file 
 DEBUG=True
 SECRET_KEY=your_django_secret_key
 
-# PostgreSQL Connection Credentials
-DB_NAME=talent_tracking
-DB_USER=postgres
-DB_PASSWORD=your_postgres_password
+DB_NAME=talenttracking
+DB_USER=root
+DB_PASSWORD=your_password
 DB_HOST=127.0.0.1
-DB_PORT=5432
+DB_PORT=3308
 ```
 
 ## API Overview
