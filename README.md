@@ -17,7 +17,7 @@ A modern, web-based recruitment and learning platform designed to streamline the
 
 * **Frontend**: HTML5, CSS3 , JavaScript
 * **Backend**: Django 5.1.4 (Python Web Framework)
-* **Database**: MySQL 
+* **Database**: MySQL/PSQL
 * **Authentication**: Session-based secure user authentication managed by Django middleware
 
 ## How It Works
@@ -79,7 +79,7 @@ pip install django psycopg2-binary
 ```
 
 ### 4. Database Setup
-
+```
 CREATE DATABASE talent_tracking;
 ```
 
